@@ -55,7 +55,7 @@
                     </p>
                 </div>
 
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-6 col-xl-4">
                     <label><b>Purpose</b></label>
                     <p>
                         @foreach ($modelsRequest->purposes as $document)
@@ -73,7 +73,7 @@
                                 above information given
                                 are true
                                 and correct. And I consent Barangay 899
-                                <br class="d-none d-xl-block">under the standards of Data Proctection and Privacy Act to
+                                under the standards of Data Proctection and Privacy Act to
                                 collect and process the given
                                 information.</label>
                         </div>
@@ -91,11 +91,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 position-relative text-center text-lg-end">
+                        <div class="col-12 col-lg-6 position-relative text-center text-lg-end" style="height: min-content;">
                             <img src="{{ url('images/request-confirm.png') }}" alt="photo"
-                                class="position-relative confirm-img mt-5" style="">
+                                class="confirm-img" style="">
                         </div>
-                        <footer class="footer" id="footer" style="top: 200px;">
+                        <footer class="footer show-footer" id="footer">
                             <div class="">
                                 <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
                             </div>

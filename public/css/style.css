@@ -374,8 +374,8 @@ header {
 }
 
 .confirm-img {
-    width: 50%;
-    margin: 0 auto;
+    width: 40%;
+    margin-top: 50px;
 }
 
 /*-----------------------------------------
@@ -384,7 +384,9 @@ header {
 .footer {
     position: relative; 
     margin-top: 10px;
+    top: 20px;
     background: transparent;
+    text-align: center;
 }
 
 @media only screen and (min-width: 540px) {
@@ -413,14 +415,19 @@ header {
     .request-img {
         position: absolute;
         width: 75%;
-        top: -80px;
-        right: -200px;
+        top: -100px;
+        right: -100px;
     }
 
     .footer {
         position: absolute; 
-        top: 150px; 
+        top: 13vw; 
         left: 0;
+        text-align: left;
+    }
+
+    .show-footer {
+        top: 20vw; 
     }
 }
 
@@ -430,12 +437,24 @@ header {
     }
     
     .request-img {
-        right: -250px;
+        top: -150px;
+        right: -120px;
     }
     
     .confirm-img {
-        top: -100px;
+        position: absolute;
+        top: -160px;
         right: -50px;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    .confirm-img {
+        top: -250px;
+    }
+
+    .show-footer {
+        top: 13.5vw; 
     }
 }
 

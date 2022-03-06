@@ -90,11 +90,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 position-relative text-center text-lg-end">
+                        <div class="col-12 col-lg-6 position-relative text-center text-lg-end" style="height: min-content;">
                             <img src="{{ url('images/request-confirm.png') }}" alt="photo"
-                                class="position-relative confirm-img mt-5" style="">
+                                class="confirm-img" style="">
                         </div>
-                        <footer class="footer" id="footer" style="top: 200px;">
+                        <footer class="footer show-footer" id="footer">
                             <div class="">
                                 <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
                             </div>

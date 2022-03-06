@@ -95,7 +95,7 @@
                         name="contact_number" placeholder="Contact Number" value="{{ old('contact_number') }}" required>
 
                     @error('contact_number')
-                        <div class="invalid-tooltip">{{ $message }}</div>
+                        <div class="invalid-tooltip">{{ $message }}</div>q
                     @enderror
                 </div>
 
@@ -107,25 +107,25 @@
                             <div class="select-options">
                                 <div class="option">
                                     <input type="checkbox" name="cor" id="cor" value="r"
-                                        data-document="Certificate of Residency" class="barangay-document"
+                                        data-document="Certificate of Residency" class="barangay-document custom-dropdown-option"
                                         @if (old('cor')) checked @endif />
                                     <label for="cor">Certificate of Residency</label>
                                 </div>
                                 <div class="option">
                                     <input type="checkbox" name="coi" id="coi" value="i"
-                                        data-document="Certificate of Indigency" class="barangay-document"
+                                        data-document="Certificate of Indigency" class="barangay-document custom-dropdown-option"
                                         @if (old('coi')) checked @endif />
                                     <label for="coi">Certificate of Indigency</label>
                                 </div>
                                 <div class="option">
                                     <input type="checkbox" name="bc" id="bc" value="c"
-                                        data-document="Barangay Certification" class="barangay-document"
+                                        data-document="Barangay Certification" class="barangay-document custom-dropdown-option"
                                         @if (old('bc')) checked @endif />
                                     <label for="bc">Barangay Certification</label>
                                 </div>
                                 <div class="option">
                                     <input type="checkbox" name="bp" id="bp" value="b" data-document="Business Permit"
-                                        class="barangay-document business-permit"
+                                        class="barangay-document business-permit custom-dropdown-option"
                                         @if (old('bp')) checked @endif />
                                     <label for="bp">Business Permit</label>
                                 </div>
@@ -252,9 +252,9 @@
                         </div>
                         <div class="col-12 col-lg-6 position-relative">
                             <img src="{{ url('images/request-create.png') }}" alt="photo"
-                                class="position-relative  request-img" style="">
+                                class="request-img" style="">
                         </div>
-                        <footer class="footer" id="footer" style="">
+                        <footer class="footer" id="footer">
                             <div class="">
                                 <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
                             </div>

@@ -575,9 +575,9 @@
                         </div>
                         <div class="col-12 col-lg-6 position-relative">
                             <img src="{{ url('images/request-create.png') }}" alt="photo"
-                                class="position-relative request-img" style="">
+                                class="request-img" style="">
                         </div>
-                        <footer class="footer" id="footer" style="">
+                        <footer class="footer" id="footer">
                             <div class="">
                                 <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
                             </div>
