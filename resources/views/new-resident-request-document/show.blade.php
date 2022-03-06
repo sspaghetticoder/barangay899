@@ -47,13 +47,12 @@
 
                 <div class="col-12 col-md-6 ps-lg-5">
                     <label><b>Barangay Documents</b></label>
-                    <ul>
+                    <p>
                         @foreach ($modelsRequest->documents as $document)
-                            <li>
-                                <p>{{ $document->name ?? 'N/A' }}</p>
-                            </li>
+                            {{ $loop->first ? '' : ', ' }}
+                            <span>{{ $document->name ?? 'N/A' }}</span>
                         @endforeach
-                    </ul>
+                    </p>
                 </div>
 
                 <div class="col-12 col-md-6">

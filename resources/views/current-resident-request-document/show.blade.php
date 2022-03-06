@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="col-12">
-                    <div class="row">
+                    <div class="row position-relative">
                         <div class="col-12 col-xl-9 col-xxl-10 d-flex flex-row align-items-start">
                             <input class="m-2" type="checkbox" name="certify" id="certify" />
                             <label class="" for="certify" class="">I hereby certify that the
@@ -95,6 +95,11 @@
                             <img src="{{ url('images/request-confirm.png') }}" alt="photo"
                                 class="position-relative confirm-img mt-5" style="">
                         </div>
+                        <footer class="footer" id="footer" style="top: 200px;">
+                            <div class="">
+                                <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
+                            </div>
+                        </footer>
                     </div>
                 </div>
             </form>
