@@ -95,31 +95,34 @@
                         name="contact_number" placeholder="Contact Number" value="{{ old('contact_number') }}" required>
 
                     @error('contact_number')
-                        <div class="invalid-tooltip">{{ $message }}</div>q
+                        <div class="invalid-tooltip">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="col-12 col-lg-9 position-relative">
                     <div class="multiselect-wrapper">
-                        <div class="select-list">
+                        <div class="position-relative select-list" style="height: min-content">
                             <div class="title title-barangay-documents">Select any barangay document you want to request
                             </div>
                             <div class="select-options">
                                 <div class="option">
                                     <input type="checkbox" name="cor" id="cor" value="r"
-                                        data-document="Certificate of Residency" class="barangay-document custom-dropdown-option"
+                                        data-document="Certificate of Residency"
+                                        class="barangay-document custom-dropdown-option"
                                         @if (old('cor')) checked @endif />
                                     <label for="cor">Certificate of Residency</label>
                                 </div>
                                 <div class="option">
                                     <input type="checkbox" name="coi" id="coi" value="i"
-                                        data-document="Certificate of Indigency" class="barangay-document custom-dropdown-option"
+                                        data-document="Certificate of Indigency"
+                                        class="barangay-document custom-dropdown-option"
                                         @if (old('coi')) checked @endif />
                                     <label for="coi">Certificate of Indigency</label>
                                 </div>
                                 <div class="option">
                                     <input type="checkbox" name="bc" id="bc" value="c"
-                                        data-document="Barangay Certification" class="barangay-document custom-dropdown-option"
+                                        data-document="Barangay Certification"
+                                        class="barangay-document custom-dropdown-option"
                                         @if (old('bc')) checked @endif />
                                     <label for="bc">Barangay Certification</label>
                                 </div>
@@ -133,14 +136,16 @@
                         </div>
                     </div>
                     @if (\Session::has('require_document'))
-                        <div class="custom-dropdown-error"
-                            style="position: absolute; top: 41px; background: #DE4856; border-radius: 5px; padding: 5px; color: white; font-size: 13px; z-index: 666;">
-                            {!! \Session::get('require_document') !!}
+                        <div class="position-relative">
+                            <div class="custom-dropdown-error"
+                                style="position: absolute; top: 2px; background: #DE4856; border-radius: 5px; padding: 5px; color: white; font-size: 13px; z-index: 666;">
+                                {!! \Session::get('require_document') !!}
+                            </div>
                         </div>
                     @endif
                 </div>
 
-                <div class="col-0 col-md-12 col-lg-3 empty-col" style="">&nbsp;</div>
+                {{-- <div class="col-0 col-md-12 col-lg-3 empty-col" style="">&nbsp;</div> --}}
 
                 <div
                     class="col-12 col-sm-6 col-lg-4 position-relative business-permit-input @if (!old('bp')) d-none @endif">
@@ -188,7 +193,7 @@
 
                 <div class="col-12 col-lg-9 position-relative">
                     <div class="multiselect-wrapper">
-                        <div class="select-list">
+                        <div class="position-relative select-list">
                             <div class="title title-request-purpose">Purpose of Request</div>
                             <div class="select-options">
                                 <div class="option">
@@ -218,14 +223,16 @@
                         </div>
                     </div>
                     @if (\Session::has('require_purpose'))
-                        <div class="custom-dropdown-error"
-                            style="position: absolute; top: 41px; background: #DE4856; border-radius: 5px; padding: 5px; color: white; font-size: 13px; z-index: 666;">
-                            {!! \Session::get('require_purpose') !!}
+                        <div class="position-relative">
+                            <div class="custom-dropdown-error"
+                                style="position: absolute; top: 2px; background: #DE4856; border-radius: 5px; padding: 5px; color: white; font-size: 13px; z-index: 666;">
+                                {!! \Session::get('require_purpose') !!}
+                            </div>
                         </div>
                     @endif
                 </div>
 
-                <div class="col-0 col-md-12 col-lg-3 empty-col" style="">&nbsp;</div>
+                {{-- <div class="col-0 col-md-12 col-lg-3 empty-col" style="">&nbsp;</div> --}}
 
                 <div
                     class="col-12 col-lg-9 position-relative specify-others-input @if (!old('oth')) d-none @endif">
@@ -251,8 +258,8 @@
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 position-relative">
-                            <img src="{{ url('images/request-create.png') }}" alt="photo"
-                                class="request-img" style="">
+                            <img src="{{ url('images/request-create.png') }}" alt="photo" class="request-img"
+                                style="">
                         </div>
                         <footer class="footer" id="footer">
                             <div class="">

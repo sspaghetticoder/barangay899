@@ -207,7 +207,8 @@
                         name="voter_status" value="{{ old('voter_status') }}" required style="border-radius: 10px">
                         <option value="" disabled selected>Voter's Status</option>
                         <option value="Voter" {{ old('voter_status') == 'Voter' ? 'selected' : '' }}>Voter</option>
-                        <option value="Non-voter" {{ old('voter_status') == 'Non-voter' ? 'selected' : '' }}>Non-voter</option>
+                        <option value="Non-voter" {{ old('voter_status') == 'Non-voter' ? 'selected' : '' }}>Non-voter
+                        </option>
                     </select>
 
                     @error('voter_status')
@@ -220,8 +221,10 @@
                         class="form-select border border-secondary default-select @error('identified_as') is-invalid @enderror grayed"
                         name="identified_as" value="{{ old('identified_as') }}" required style="border-radius: 10px">
                         <option value="" disabled selected>Identified as</option>
-                        <option value="Positive" {{ old('identified_as') == 'Positive' ? 'selected' : '' }}>Positive</option>
-                        <option value="Negative" {{ old('identified_as') == 'Negative' ? 'selected' : '' }}>Negative</option>
+                        <option value="Positive" {{ old('identified_as') == 'Positive' ? 'selected' : '' }}>Positive
+                        </option>
+                        <option value="Negative" {{ old('identified_as') == 'Negative' ? 'selected' : '' }}>Negative
+                        </option>
                     </select>
 
                     @error('identified_as')
@@ -230,7 +233,8 @@
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
-                    <input type="email" title="Example: sample@gmail.com" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+                    <input type="email" title="Example: sample@gmail.com"
+                        pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
                         class="form-control border border-secondary @error('email_add') is-invalid @enderror grayed"
                         name="email_add" placeholder="Email Address" value="{{ old('email_add') }}" required>
 
@@ -310,7 +314,8 @@
                         name="emp_stat" value="{{ old('emp_stat') }}" required style="border-radius: 10px">
                         <option value="" disabled selected>Employment Status</option>
                         <option value="Working" {{ old('emp_stat') == 'Working' ? 'selected' : '' }}>Working</option>
-                        <option value="Non-working" {{ old('emp_stat') == 'Non-working' ? 'selected' : '' }}>Non-working</option>
+                        <option value="Non-working" {{ old('emp_stat') == 'Non-working' ? 'selected' : '' }}>Non-working
+                        </option>
                     </select>
 
                     @error('emp_stat')
@@ -421,7 +426,7 @@
 
                 <div class="col-12 col-lg-9 position-relative">
                     <div class="multiselect-wrapper">
-                        <div class="select-list">
+                        <div class="position-relative select-list">
                             <div class="title title-barangay-documents">Select any barangay document you want to request
                             </div>
                             <div class="select-options">
@@ -453,14 +458,16 @@
                         </div>
                     </div>
                     @if (\Session::has('require_document'))
-                        <div class="custom-dropdown-error"
-                            style="position: absolute; top: 41px; background: #DE4856; border-radius: 5px; padding: 5px; color: white; font-size: 13px; z-index: 666;">
-                            {!! \Session::get('require_document') !!}
+                        <div class="position-relative">
+                            <div class="custom-dropdown-error"
+                                style="position: absolute; top: 2px; background: #DE4856; border-radius: 5px; padding: 5px; color: white; font-size: 13px; z-index: 666;">
+                                {!! \Session::get('require_document') !!}
+                            </div>
                         </div>
                     @endif
                 </div>
 
-                <div class="col-0 col-md-12 col-lg-3 empty-col" style="">&nbsp;</div>
+                {{-- <div class="col-0 col-md-12 col-lg-3 empty-col" style="">&nbsp;</div> --}}
 
                 <div
                     class="col-12 col-sm-6 col-lg-4 position-relative business-permit-input @if (!old('bp')) d-none @endif">
@@ -508,7 +515,7 @@
 
                 <div class="col-12 col-lg-9 position-relative">
                     <div class="multiselect-wrapper">
-                        <div class="select-list">
+                        <div class="position-relative select-list">
                             <div class="title title-request-purpose">Purpose of Request</div>
                             <div class="select-options">
                                 <div class="option">
@@ -539,14 +546,16 @@
                         </div>
                     </div>
                     @if (\Session::has('require_purpose'))
-                        <div class="custom-dropdown-error"
-                            style="position: absolute; top: 41px; background: #DE4856; border-radius: 5px; padding: 5px; color: white; font-size: 13px; z-index: 666;">
-                            {!! \Session::get('require_purpose') !!}
+                        <div class="position-relative">
+                            <div class="custom-dropdown-error"
+                                style="position: absolute; top: 2px; background: #DE4856; border-radius: 5px; padding: 5px; color: white; font-size: 13px; z-index: 666;">
+                                {!! \Session::get('require_purpose') !!}
+                            </div>
                         </div>
                     @endif
                 </div>
 
-                <div class="col-0 col-md-12 col-lg-3 empty-col" style="">&nbsp;</div>
+                {{-- <div class="col-0 col-md-12 col-lg-3 empty-col" style="">&nbsp;</div> --}}
 
                 <div
                     class="col-12 col-lg-9 position-relative specify-others-input @if (!old('oth')) d-none @endif">
@@ -561,30 +570,29 @@
 
                 <div class="col-12">
                     <div class="row position-relative"">
-                        <div class="col-12 col-lg-6 pt-5">
-                            <div class="row">
-                                <div class="col-12 col-md-3 col-lg-4">
-                                    <a href="{{ route('home') }}"
-                                        class="w-100 btn btn-primary form-btn btn-cancel">Cancel</a>
-                                </div>
-                                <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
-                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next"
-                                        value=" Next " form="requests.store">
-                                </div>
+                                <div class="  col-12 col-lg-6 pt-5">
+                        <div class="row">
+                            <div class="col-12 col-md-3 col-lg-4">
+                                <a href="{{ route('home') }}"
+                                    class="w-100 btn btn-primary form-btn btn-cancel">Cancel</a>
+                            </div>
+                            <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
+                                <input type="submit" class="w-100 btn btn-primary form-btn btn-next" value=" Next "
+                                    form="requests.store">
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 position-relative">
-                            <img src="{{ url('images/request-create.png') }}" alt="photo"
-                                class="request-img" style="">
-                        </div>
-                        <footer class="footer" id="footer">
-                            <div class="">
-                                <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
-                            </div>
-                        </footer>
                     </div>
+                    <div class="col-12 col-lg-6 position-relative">
+                        <img src="{{ url('images/request-create.png') }}" alt="photo" class="request-img" style="">
+                    </div>
+                    <footer class="footer" id="footer">
+                        <div class="">
+                            <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
+                        </div>
+                    </footer>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 
@@ -604,7 +612,7 @@
 @endsection
 
 @push('scripts')
-    {{-- prevent returning to prev page  --}}
+    {{-- prevent returning to prev page --}}
     <script defer>
         function preventBack() {
             window.history.forward();

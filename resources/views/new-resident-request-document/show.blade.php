@@ -85,7 +85,7 @@
                                         form="requests.destroy">
                                 </div>
                                 <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
-                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next" value="Okay"
+                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next" value="Submit"
                                     form="requests.confirm">
                                 </div>
                             </div>
