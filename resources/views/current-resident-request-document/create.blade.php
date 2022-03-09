@@ -145,8 +145,6 @@
                     @endif
                 </div>
 
-                {{-- <div class="col-0 col-md-12 col-lg-3 empty-col" style="">&nbsp;</div> --}}
-
                 <div
                     class="col-12 col-sm-6 col-lg-4 position-relative business-permit-input @if (!old('bp')) d-none @endif">
                     <input type="search" autocomplete="off"
@@ -232,8 +230,6 @@
                     @endif
                 </div>
 
-                {{-- <div class="col-0 col-md-12 col-lg-3 empty-col" style="">&nbsp;</div> --}}
-
                 <div
                     class="col-12 col-lg-9 position-relative specify-others-input @if (!old('oth')) d-none @endif">
                     <input type="search" autocomplete="off"
@@ -253,7 +249,7 @@
                                     <a href="#" class="w-100 btn btn-primary form-btn btn-cancel">Cancel</a>
                                 </div>
                                 <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
-                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next" value=" Next ">
+                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0" value=" Next ">
                                 </div>
                             </div>
                         </div>
@@ -282,7 +278,7 @@
                 {{ \Session::get('Exception')['message'] ?? 'N/A' }}
             </x-slot>
 
-            <button type="button" class="btn btn-primary px-4 form-btn btn-next" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary px-4 form-btn btn-next border-0" data-bs-dismiss="modal">Close</button>
         </x-modal>
     @endif
 @endsection

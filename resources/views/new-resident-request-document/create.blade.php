@@ -105,7 +105,7 @@
                     <select
                         class="form-select border border-secondary default-select @error('sex') is-invalid @enderror grayed"
                         name="sex" value="{{ old('sex') }}" required style="border-radius: 10px">
-                        <option value="" disabled selected>Sex</option>
+                        <option value="" disabled selected class="">Sex</option>
                         <option value="male" {{ old('sex') == 'male' ? 'selected' : '' }}>Male</option>
                         <option value="female" {{ old('sex') == 'female' ? 'selected' : '' }}>Female</option>
                     </select>
@@ -427,7 +427,7 @@
                 <div class="col-12 col-lg-9 position-relative">
                     <div class="multiselect-wrapper">
                         <div class="position-relative select-list">
-                            <div class="title title-barangay-documents">Select any barangay document you want to request
+                            <div class="title title-barangay-documents ">Select any barangay document you want to request
                             </div>
                             <div class="select-options">
                                 <div class="option">
@@ -466,8 +466,6 @@
                         </div>
                     @endif
                 </div>
-
-                {{-- <div class="col-0 col-md-12 col-lg-3 empty-col" style="">&nbsp;</div> --}}
 
                 <div
                     class="col-12 col-sm-6 col-lg-4 position-relative business-permit-input @if (!old('bp')) d-none @endif">
@@ -516,7 +514,7 @@
                 <div class="col-12 col-lg-9 position-relative">
                     <div class="multiselect-wrapper">
                         <div class="position-relative select-list">
-                            <div class="title title-request-purpose">Purpose of Request</div>
+                            <div class="title title-request-purpose ">Purpose of Request</div>
                             <div class="select-options">
                                 <div class="option">
                                     <input form="requests.store" type="checkbox" name="sch" id="scholarship"
@@ -555,8 +553,6 @@
                     @endif
                 </div>
 
-                {{-- <div class="col-0 col-md-12 col-lg-3 empty-col" style="">&nbsp;</div> --}}
-
                 <div
                     class="col-12 col-lg-9 position-relative specify-others-input @if (!old('oth')) d-none @endif">
                     <input type="search" autocomplete="off" form="requests.store"
@@ -577,7 +573,7 @@
                                     class="w-100 btn btn-primary form-btn btn-cancel">Cancel</a>
                             </div>
                             <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
-                                <input type="submit" class="w-100 btn btn-primary form-btn btn-next" value=" Next "
+                                <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0" value=" Next "
                                     form="requests.store">
                             </div>
                         </div>
@@ -606,7 +602,7 @@
                 {{ \Session::get('Exception')['message'] ?? 'N/A' }}
             </x-slot>
 
-            <button type="button" class="btn btn-primary px-4 form-btn btn-next" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary px-4 form-btn btn-next border-0" data-bs-dismiss="modal">Close</button>
         </x-modal>
     @endif
 @endsection

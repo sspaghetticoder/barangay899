@@ -67,11 +67,13 @@ $(function () {
 
         if (documents.length === 0) {
             $("." + selectTitle).css("background-color", "white");
+            $("." + selectTitle).css("color", "#B8B8B8");
 
             return $("." + selectTitle).text(title);
         }
 
         $("." + selectTitle).css("background-color", "#E9E9E9");
+        $("." + selectTitle).css("color", "black");
 
         return $("." + selectTitle).text(documents.join(", "));
     }
