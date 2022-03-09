@@ -11,11 +11,13 @@
                             Welcome to Barrio Puso!
                         </h1>
                         <p class="page-header-text lead">
-                            A barangay that serve and help with a heart.
+                            {{-- A barangay that serve and help with a heart. --}}
+                            Lorem ipsum dolor sit amet consectetur adipisicing.
                         </p>
                         <p class="page-header-text text-sm">
-                            You can now request any documents from our barangay here and give feedback to us for the
-                            betterment of our barangay and service.
+                            {{-- You can now request any documents from our barangay here and give feedback to us for the
+                            betterment of our barangay and service. --}}
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto corrupti explicabo mollitia quasi labore praesentium rem fuga.
                         </p>
                     </div>
                     <div class="col-12 col-lg-6">
