@@ -6,8 +6,8 @@
         <li class="nav-item">
             <a class="nav-link ms-4 d-none d-sm-block" href="{{ route('home') }}">Home</a>
             <a class="nav-link ms-4 d-block d-sm-none" href="{{ route('home') }}">
-                <svg xmlns="http://www.w3.org/2000/svg" strokeWidth="2" width="18" height="18" fill="currentColor" class="bi bi-house"
-                    viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" strokeWidth="2" width="18" height="18" fill="currentColor"
+                    class="bi bi-house" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
                         d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
                     <path fill-rule="evenodd"
@@ -26,7 +26,8 @@
                 <p class="text-left">Summary of Request</p>
             </div>
 
-            <form id="requests.destroy" action="{{ route('current_resident.requests.destroy', $modelsRequest) }}" method="POST">
+            <form id="requests.destroy" action="{{ route('current_resident.requests.destroy', $modelsRequest) }}"
+                method="POST">
                 @method('DELETE')
                 @csrf
             </form>
@@ -90,19 +91,19 @@
                         <div class="col-12 col-lg-6 pt-5">
                             <div class="row">
                                 <div class="col-12 col-md-3 col-lg-4">
-                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0" value=" Back "
-                                        form="requests.destroy">
+                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0"
+                                        value=" Back " form="requests.destroy">
                                 </div>
                                 <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
                                     <!-- Button trigger modal -->
-                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0" value=" Submit "
-                                    form="requests.confirm">
+                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0"
+                                        value=" Submit " form="requests.confirm">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 position-relative text-center text-lg-end" style="height: min-content;">
-                            <img src="{{ url('images/request-confirm.png') }}" alt="photo"
-                                class="confirm-img" style="">
+                            <img src="{{ url('images/request-confirm.png') }}" alt="photo" class="confirm-img"
+                                style="">
                         </div>
                         <footer class="footer show-footer" id="footer">
                             <div class="">
@@ -134,9 +135,9 @@
                     <button type="button" class="btn btn-primary px-4 form-btn btn-next"
                         data-bs-dismiss="modal">Close</button>
                 @else
-                    <button type="button" class="btn btn-primary form-btn btn-next border-0"
-                                    data-bs-toggle="modal" data-bs-target="#confirmModal">
-                                    Okay
+                    <button type="button" class="btn btn-primary form-btn btn-next border-0" data-bs-toggle="modal"
+                        data-bs-target="#confirmModal">
+                        Okay
                     </button>
                 @endif
             </x-modal>

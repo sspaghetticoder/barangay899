@@ -25,6 +25,7 @@ class Request extends Model
         'name_of_witness',
         'request_status',
         'resident_status',
+        'confirmed_at',
     ];
 
     public array $resident_statuses = [

@@ -29,6 +29,7 @@ class CreateRequestsTable extends Migration
             $table->string('name_of_witness')->nullable();
             $table->string('request_status')->default('not done');
             $table->string('resident_status');
+            $table->timestamp('confirmed_at')->nullable();
             $table->timestamps();
         });
     }

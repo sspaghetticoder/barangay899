@@ -30,7 +30,7 @@
                 <a class="nav-link ms-4" href="{{ route('home') }}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ms-4" href="#">Request Document</a>
+                <a class="nav-link ms-4" href="{{  route('new_resident.requests.create') }}">Request Document</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link ms-4" href="#">About</a>

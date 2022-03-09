@@ -137,6 +137,8 @@ class NewResidentRequestDocumentController extends Controller
     {
         $modelsRequest = ModelsRequest::with('documents')->findOrFail($id);
 
+        if ($modelsRequest->confirmed_at) return redirect()->route('home');
+
         if ($modelsRequest->resident_status != $this->residentStatus) abort(404);
 
         return view('new-resident-request-document.show', compact('modelsRequest'));

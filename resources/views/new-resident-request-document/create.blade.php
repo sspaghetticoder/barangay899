@@ -105,7 +105,7 @@
                     <select
                         class="form-select border border-secondary default-select @error('sex') is-invalid @enderror grayed"
                         name="sex" value="{{ old('sex') }}" required style="border-radius: 10px">
-                        <option value="" disabled selected class="">Sex</option>
+                        <option value="" disabled selected>Sex</option>
                         <option value="male" {{ old('sex') == 'male' ? 'selected' : '' }}>Male</option>
                         <option value="female" {{ old('sex') == 'female' ? 'selected' : '' }}>Female</option>
                     </select>
@@ -427,7 +427,7 @@
                 <div class="col-12 col-lg-9 position-relative">
                     <div class="multiselect-wrapper">
                         <div class="position-relative select-list">
-                            <div class="title title-barangay-documents ">Select any barangay document you want to request
+                            <div class="title title-barangay-documents">Select any barangay document you want to request
                             </div>
                             <div class="select-options">
                                 <div class="option">
@@ -514,7 +514,7 @@
                 <div class="col-12 col-lg-9 position-relative">
                     <div class="multiselect-wrapper">
                         <div class="position-relative select-list">
-                            <div class="title title-request-purpose ">Purpose of Request</div>
+                            <div class="title title-request-purpose">Purpose of Request</div>
                             <div class="select-options">
                                 <div class="option">
                                     <input form="requests.store" type="checkbox" name="sch" id="scholarship"
@@ -566,29 +566,28 @@
 
                 <div class="col-12">
                     <div class="row position-relative"">
-                                <div class="  col-12 col-lg-6 pt-5">
-                        <div class="row">
-                            <div class="col-12 col-md-3 col-lg-4">
-                                <a href="{{ route('home') }}"
-                                    class="w-100 btn btn-primary form-btn btn-cancel">Cancel</a>
-                            </div>
-                            <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
-                                <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0" value=" Next "
-                                    form="requests.store">
+                        <div class="   col-12 col-lg-6 pt-5">
+                            <div class=" row">
+                                <div class="col-12 col-md-3 col-lg-4">
+                                    <a href="{{ route('home') }}" class="w-100 btn btn-primary form-btn btn-cancel">Cancel</a>
+                                </div>
+                                <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
+                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0" value=" Next "
+                                        form="requests.store">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-lg-6 position-relative">
-                        <img src="{{ url('images/request-create.png') }}" alt="photo" class="request-img" style="">
-                    </div>
-                    <footer class="footer" id="footer">
-                        <div class="">
-                            <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
+                        <div class="col-12 col-lg-6 position-relative">
+                            <img src="{{ url('images/request-create.png') }}" alt="photo" class="request-img" style="">
                         </div>
-                    </footer>
+                        <footer class="footer" id="footer">
+                            <div class="">
+                                <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
+                            </div>
+                        </footer>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
 
@@ -602,7 +601,8 @@
                 {{ \Session::get('Exception')['message'] ?? 'N/A' }}
             </x-slot>
 
-            <button type="button" class="btn btn-primary px-4 form-btn btn-next border-0" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary px-4 form-btn btn-next border-0"
+                data-bs-dismiss="modal">Close</button>
         </x-modal>
     @endif
 @endsection

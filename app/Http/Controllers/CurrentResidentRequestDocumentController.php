@@ -93,6 +93,8 @@ class CurrentResidentRequestDocumentController extends Controller
     {
         $modelsRequest = ModelsRequest::with('documents')->findOrFail($id);
 
+        if ($modelsRequest->confirmed_at) return redirect()->route('home');
+
         if ($modelsRequest->resident_status != $this->residentStatus) abort(404);
 
         return view('current-resident-request-document.show', compact('modelsRequest'));
@@ -105,6 +107,10 @@ class CurrentResidentRequestDocumentController extends Controller
      */
     public function confirm($id, ConfirmDocumentRequest $request)
     {
+        $modelsRequest = ModelsRequest::findOrFail($id);
+        $modelsRequest->confirmed_at = now();
+        $modelsRequest->save();
+
         return redirect()->route('home')->with('showModal', '');
     }
 
