@@ -380,12 +380,22 @@ input[type=email]::placeholder {
 
 .request-img {
     position: relative;
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
+}
+
+.request-img img {
+    width: 100%;
 }
 
 .confirm-img {
-    width: 40%;
+    position: relative;
+    width: 100%;
+}
+
+.confirm-img img {
+    width: 50%;
+    display:block;
+    margin: 0px auto;
     margin-top: 50px;
 }
 
@@ -398,11 +408,12 @@ input[type=email]::placeholder {
 /*-----------------------------------------
     CONTACT or FOOTER
 ------------------------------------------*/
-.footer {
+.footer,
+.confirm-footer {
     position: relative;
-    display: block;
     width: 100%; 
     text-align: center;
+    padding-top: 10px;
 }
 
 @media only screen and (min-width: 540px) {
@@ -428,18 +439,49 @@ input[type=email]::placeholder {
         font-size: 1.5rem;
     }
 
-    .request-img {
-        width: 35%;
-        position: absolute;
-        bottom: 20px;
+    .request-img,
+    .confirm-img {
+        width: 20%;
+        margin-left: auto;
+        position: relative;
+        bottom: 0px;
         right: 0px;
     }
 
-    .footer {
+    .request-img::after, 
+    .confirm-img::after {
         position: absolute;
-        margin: 0;
+        content: "";
         bottom: 0;
-        padding-left: 95px;
+    }
+
+    .request-img img {
+        position: absolute;
+        top: -150px;
+        left: -180px;
+        width: 400px;
+    } 
+    
+    .confirm-img img {
+        position: absolute;
+        top: -210px;
+        left: 0px;
+        width: 150px;
+    }
+
+    .footer {
+        position: relative;
+        padding-left: 3%;
+        float: left;
+        bottom: -190px;
+        text-align: left;
+    }
+
+    .confirm-footer {
+        position: relative;
+        padding-left: 5%;
+        float: left;
+        bottom: -80px;
         text-align: left;
     }
 
@@ -452,19 +494,24 @@ input[type=email]::placeholder {
     #app-logo {
         width: 3rem;
     }
-    
-    .confirm-img {
-        position: absolute;
-        top: -160px;
-        right: -50px;
+
+    .request-img img {
+        left: -150px;
+    }
+
+    .confirm-img img {
+        top: -285px;
+        left: 20px;
+        width: 190px;
+    }
+
+    .confirm-footer {
+        padding-left: 4%;
+        bottom: -80px;
     }
 }
 
 @media only screen and (min-width: 1400px) {
-    .confirm-img {
-        top: -250px;
-    }
-
     .show-footer {
         top: 13.5vw; 
     }

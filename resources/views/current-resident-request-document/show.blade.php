@@ -19,10 +19,10 @@
 @endsection
 
 @section('content')
-    <section class="mt-5 py-5">
-        <div class="container px-3 px-md-5">
+    <section class="">
+        <div class="container px-3 px-md-5 position-relative">
             <div class="row px-0 px-lg-5">
-                <h2 class="text-center"><b>Confirmation</b></h2>
+                <h2 class="text-center mt-5 pt-5"><b>Confirmation</b></h2>
                 <p class="text-left">Summary of Request</p>
             </div>
 
@@ -77,7 +77,7 @@
 
                 <div class="col-12">
                     <div class="row position-relative">
-                        <div class="col-12 col-xl-9 col-xxl-10 d-flex flex-row align-items-start">
+                        <div class="col-12 col-lg-10 col-xl-9 d-flex flex-row align-items-start">
                             <input class="m-2" type="checkbox" name="certify" id="certify" />
                             <label class="" for="certify" class="">I hereby certify that the
                                 above information given
@@ -95,24 +95,24 @@
                                         value=" Back " form="requests.destroy">
                                 </div>
                                 <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
-                                    <!-- Button trigger modal -->
                                     <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0 main-cta"
                                         value=" Submit " form="requests.confirm">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 position-relative text-center text-lg-end" style="height: min-content;">
-                            <img src="{{ url('images/request-confirm.png') }}" alt="photo" class="confirm-img"
-                                style="">
-                        </div>
-                        <footer class="footer show-footer" id="footer">
-                            <div class="">
-                                <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
-                            </div>
-                        </footer>
                     </div>
                 </div>
             </form>
+
+            <div class="confirm-img">
+                <img src="{{ url('images/request-confirm.png') }}" alt="photo" class="" style="">
+            </div>
+
+            <footer class="confirm-footer" id="footer" style="">
+                <div class="">
+                    <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
+                </div>
+            </footer>
 
             <x-modal>
                 <x-slot name="title">
