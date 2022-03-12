@@ -188,8 +188,8 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="number" min="1"
                         class="form-control border border-secondary @error('years_of_residence') is-invalid @enderror grayed"
-                        name="years_of_residence" placeholder="Years of Residency"
-                        value="{{ old('years_of_residence') }}" required>
+                        name="years_of_residence" placeholder="Years of Residency (Optional)"
+                        value="{{ old('years_of_residence') }}">
 
                     @error('years_of_residence')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -355,7 +355,7 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="number"
                         class="form-control border border-secondary @error('monthly_income') is-invalid @enderror grayed"
-                        name="monthly_income" placeholder="Monthly Income" value="{{ old('monthly_income') }}" required>
+                        name="monthly_income" placeholder="Monthly Income (Optional)" value="{{ old('monthly_income') }}">
 
                     @error('monthly_income')
                         <div class="invalid-tooltip">{{ $message }}</div>

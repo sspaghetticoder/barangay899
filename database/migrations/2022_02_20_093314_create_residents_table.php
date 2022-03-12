@@ -28,7 +28,7 @@ class CreateResidentsTable extends Migration
             $table->string('religion');
             $table->string('blood_type');
             $table->string('pwd');
-            $table->unsignedInteger('years_of_residence');
+            $table->unsignedInteger('years_of_residence')->nullable();
             $table->string('member_4ps');
             $table->string('voter_status');
             $table->string('identified_as');
@@ -37,7 +37,7 @@ class CreateResidentsTable extends Migration
             $table->string('emp_stat');
             $table->string('occupation')->nullable();
             $table->string('emp_name')->nullable();
-            $table->unsignedInteger('monthly_income');
+            $table->unsignedInteger('monthly_income')->nullable();
             $table->string('floor_no')->nullable();
             $table->string('block_no')->nullable();
             $table->string('street_name');

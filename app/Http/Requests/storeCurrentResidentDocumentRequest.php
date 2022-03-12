@@ -27,7 +27,7 @@ class storeCurrentResidentDocumentRequest extends FormRequest
         return [
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
-            'middle_name' => 'required|string|max:255',
+            'middle_name' => 'required|string|max:255|min:2',
             'suffix' => 'nullable|string|max:255',
             'house_number' => 'required|string|max:255',
             'street' => 'required|string|max:255',
