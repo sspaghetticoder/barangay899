@@ -11,7 +11,7 @@
             <div class="modal-body">
                 {{ $message ?? 'N/A' }}
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="border-top: 1px solid #0C7087;">
                 {{  $slot ?? '' }}
             </div>
         </div>
