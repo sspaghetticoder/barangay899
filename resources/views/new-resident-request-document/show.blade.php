@@ -18,7 +18,7 @@
 @endsection
 
 @section('content')
-    <section class="">
+    <section class="position-relative" style="min-height: 100vh;">
         <div class="container px-3 px-md-5 position-relative">
             <div class="row px-0 px-lg-5">
                 <h2 class="text-center mt-5 pt-5"><b>Confirmation</b></h2>

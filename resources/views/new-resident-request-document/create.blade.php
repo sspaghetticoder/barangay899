@@ -18,7 +18,7 @@
 @endsection
 
 @section('content')
-    <section class="mt-5 pt-5">
+    <section class="mt-5 pt-5 position-relative" style="min-height: 100vh;">
         <div class="container px-3 px-md-5 position-relative" style="min-height: 90vh;">
             <div class="row px-0 px-lg-5">
                 <h2 class="text-center mt-5"><b>Personal Information</b></h2>
