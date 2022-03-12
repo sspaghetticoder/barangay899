@@ -376,9 +376,8 @@ input[type=email]::placeholder {
 
 .request-img {
     position: relative;
-    width: 100%;
-    top: 0px;
-    right: 0px;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .confirm-img {
@@ -390,10 +389,9 @@ input[type=email]::placeholder {
     CONTACT or FOOTER
 ------------------------------------------*/
 .footer {
-    position: relative; 
-    margin-top: 10px;
-    top: 20px;
-    background: transparent;
+    position: relative;
+    display: block;
+    width: 100%; 
     text-align: center;
 }
 
@@ -421,16 +419,17 @@ input[type=email]::placeholder {
     }
 
     .request-img {
+        width: 35%;
         position: absolute;
-        width: 75%;
-        top: -100px;
-        right: -100px;
+        bottom: 20px;
+        right: 0px;
     }
 
     .footer {
-        position: absolute; 
-        top: 13vw; 
-        left: 0;
+        position: absolute;
+        margin: 0;
+        bottom: 0;
+        padding-left: 95px;
         text-align: left;
     }
 
@@ -442,11 +441,6 @@ input[type=email]::placeholder {
 @media only screen and (min-width: 1200px) {
     #app-logo {
         width: 3rem;
-    }
-    
-    .request-img {
-        top: -150px;
-        right: -120px;
     }
     
     .confirm-img {

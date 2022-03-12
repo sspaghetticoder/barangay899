@@ -41,7 +41,7 @@
         </x-header>
     @endif
 
-    <div class="container">
+    <div class="container position-relative" style="min-height: 100vh;">
         @hasSection('content')
             @yield('content')
         @endif

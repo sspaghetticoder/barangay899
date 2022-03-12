@@ -19,10 +19,10 @@
 @endsection
 
 @section('content')
-    <section class="mt-5 py-5">
+    <section class="pt-5">
         <div class="container px-3 px-md-5">
             <div class="row px-0 px-lg-5">
-                <h2 class="text-center"><b>Request Documents</b></h2>
+                <h2 class="text-center mt-5"><b>Request Documents</b></h2>
                 <p class="text-left">Please fill out all the necessary fields.</p>
             </div>
 
@@ -251,7 +251,7 @@
                 </div>
 
                 <div class="col-12">
-                    <div class="row position-relative">
+                    <div class="row">
                         <div class="col-12 col-lg-6 pt-5">
                             <div class="row">
                                 <div class="col-12 col-md-3 col-lg-4">
@@ -263,20 +263,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 position-relative">
-                            <img src="{{ url('images/request-create.png') }}" alt="photo" class="request-img"
-                                style="">
-                        </div>
-                        <footer class="footer" id="footer">
-                            <div class="">
-                                <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
-                            </div>
-                        </footer>
                     </div>
                 </div>
             </form>
         </div>
     </section>
+
+    <div class="request-img">
+        <img src="{{ url('images/request-create.png') }}" alt="photo" class="" style="width: 100%">
+    </div>
+
+    <footer class="footer" id="footer" style="">
+        <div class="">
+            <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
+        </div>
+    </footer>
 
     @if (\Session::has('Exception'))
         <x-modal>
