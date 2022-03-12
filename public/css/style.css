@@ -389,6 +389,12 @@ input[type=email]::placeholder {
     margin-top: 50px;
 }
 
+.main-cta:hover,
+.main-cta:active,
+.main-cta:focus {
+    background: #00BBD9;
+}
+
 /*-----------------------------------------
     CONTACT or FOOTER
 ------------------------------------------*/

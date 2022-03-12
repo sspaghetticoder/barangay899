@@ -255,10 +255,10 @@
                         <div class="col-12 col-lg-6 pt-5">
                             <div class="row">
                                 <div class="col-12 col-md-3 col-lg-4">
-                                    <a href="#" class="w-100 btn btn-primary form-btn btn-cancel">Cancel</a>
+                                    <a href="#" class="w-100 btn btn-primary form-btn btn-cancel main-cta">Cancel</a>
                                 </div>
                                 <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
-                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0"
+                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0 main-cta"
                                         value=" Next ">
                                 </div>
                             </div>
@@ -289,7 +289,7 @@
                 {{ \Session::get('Exception')['message'] ?? 'N/A' }}
             </x-slot>
 
-            <button type="button" class="btn btn-primary px-4 form-btn btn-next border-0"
+            <button type="button" class="btn btn-primary px-4 form-btn btn-next border-0 main-cta"
                 data-bs-dismiss="modal">Close</button>
         </x-modal>
     @endif

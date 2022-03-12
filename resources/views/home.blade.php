@@ -38,7 +38,7 @@
             You will receive an email once your requested document is available for pick up.
         </x-slot>
 
-        <button type="button" class="btn btn-primary px-4 form-btn btn-next border-0" data-bs-dismiss="modal">Okay</button>
+        <button type="button" class="btn btn-primary px-4 form-btn btn-next border-0 main-cta" data-bs-dismiss="modal">Okay</button>
     </x-modal>
 @endsection
 
