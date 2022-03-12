@@ -452,10 +452,11 @@
                                     <label for="coi">Certificate of Indigency</label>
                                 </div>
                                 <div class="option">
-                                    <input form="requests.store" type="checkbox" name="bc" id="bc" value="c"
-                                        data-document="Barangay Certification" class="barangay-document"
+                                    <input type="checkbox" name="bc" id="bc" value="c"
+                                        data-document="Barangay Clearance"
+                                        class="barangay-document custom-dropdown-option"
                                         @if (old('bc')) checked @endif />
-                                    <label for="bc">Barangay Certification</label>
+                                    <label for="bc">Barangay Clearance</label>
                                 </div>
                                 <div class="option">
                                     <input form="requests.store" type="checkbox" name="bp" id="bp" value="b" <input

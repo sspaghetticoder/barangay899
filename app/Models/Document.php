@@ -20,7 +20,7 @@ class Document extends Model
     public $barangayDocuments = [
         'r' => 'Certificate of Residency',
         'i' => 'Certificate of Indigency', 
-        'c' => 'Barangay Certification',
+        'c' => 'Barangay Clearance',
         'b' => 'Business Permit'
     ];
 
