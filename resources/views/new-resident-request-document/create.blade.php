@@ -230,9 +230,9 @@
                         class="form-select border border-secondary default-select @error('identified_as') is-invalid @enderror grayed"
                         name="identified_as" value="{{ old('identified_as') }}" required style="border-radius: 10px">
                         <option value="" disabled selected>Identified as</option>
-                        <option value="Positive" {{ old('identified_as') == 'Positive' ? 'selected' : '' }}>Positive
+                        <option value="Active Voter" {{ old('identified_as') == 'Active Voter' ? 'selected' : '' }}>Active Voter
                         </option>
-                        <option value="Negative" {{ old('identified_as') == 'Negative' ? 'selected' : '' }}>Negative
+                        <option value="Inactive Voter" {{ old('identified_as') == 'Inactive Voter' ? 'selected' : '' }}>Inactive Voter
                         </option>
                     </select>
 
@@ -322,8 +322,8 @@
                         class="form-select border border-secondary default-select @error('emp_stat') is-invalid @enderror grayed"
                         name="emp_stat" value="{{ old('emp_stat') }}" required style="border-radius: 10px">
                         <option value="" disabled selected>Employment Status</option>
-                        <option value="Working" {{ old('emp_stat') == 'Working' ? 'selected' : '' }}>Working</option>
-                        <option value="Non-working" {{ old('emp_stat') == 'Non-working' ? 'selected' : '' }}>Non-working
+                        <option value="Employed" {{ old('emp_stat') == 'Employed' ? 'selected' : '' }}>Employed</option>
+                        <option value="Unemploted" {{ old('emp_stat') == 'Unemploted' ? 'selected' : '' }}>Unemploted
                         </option>
                     </select>
 
