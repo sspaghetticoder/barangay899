@@ -55,9 +55,11 @@
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
+                    <label for="middle_name" class="notice" style="font-size: 11px;"><span class="text-danger"><b>*</b></span>Put N/A if not applicable.</label>
+                    
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('middle_name') is-invalid @enderror grayed"
-                        name="middle_name" placeholder="Middlename" value="{{ old('middle_name') }}" required>
+                        name="middle_name" id="middle_name" placeholder="Middlename" value="{{ old('middle_name') }}" required>
 
                     @error('middle_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -610,7 +612,7 @@
             </x-slot>
 
             <x-slot name="message">
-                {{ \Session::get('Exception')['message'] ?? 'N/A' }}
+                {!! \Session::get('Exception')['message'] ?? 'N/A' !!}
             </x-slot>
 
             <button type="button" class="btn btn-primary px-4 form-btn btn-next border-0 main-cta"
@@ -620,16 +622,7 @@
 @endsection
 
 @push('scripts')
-    {{-- prevent returning to prev page --}}
-    <script defer>
-        function preventBack() {
-            window.history.forward();
-        }
-        window.onunload = function() {
-            null;
-        };
-        setTimeout("preventBack()", 0);
-    </script>
+    <script src="{{ url('js/prevent-back.js') }}" defer></script>
 
     {{-- change inputs background color --}}
     <script defer>

@@ -7,9 +7,7 @@ use App\Http\Requests\storeCurrentResidentDocumentRequest;
 use App\Http\Services\RequestDocuments;
 use App\Models\Document;
 use App\Models\Request as ModelsRequest;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Resident;
 
 class CurrentResidentRequestDocumentController extends Controller
 {
@@ -23,14 +21,16 @@ class CurrentResidentRequestDocumentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responsen
      */
-    public function create()
+    public function create($id = null)
     {
-        return view('current-resident-request-document.create');
+        $resident = Resident::find($id);
+
+        return view('current-resident-request-document.create', compact('resident'));
     }
 
-    /**
+    /** j.
      * Store a newly created resource in storage.
      * 
      * validate post request using storeCurrentResidentDocumentRequest
@@ -40,6 +40,17 @@ class CurrentResidentRequestDocumentController extends Controller
     public function store(storeCurrentResidentDocumentRequest $request)
     {
         try {
+            //scope query
+            $resident = Resident::findRecord($request->last_name, $request->first_name, $request->middle_name, $request->suffix, $request->house_number)->first();
+            
+            //no record in the database
+            if (is_null($resident)) return redirect()->back()->with('showModal', '')
+                    ->withInput($request->all())
+                    ->with('Exception', [
+                        'title' => 'Notice!',
+                        'message' => 'Your records or personal information is not yet in the database please proceed to <a href="'.route("new_resident.requests.create").'" class="text-info"><u>new resident</u></a> to fillout the form',
+                    ]);
+        
             //check App -> Http -> Services.
             $requestDocuments = new RequestDocuments();
 
@@ -59,7 +70,7 @@ class CurrentResidentRequestDocumentController extends Controller
                 array_merge(
                     $request->only('last_name', 'first_name', 'middle_name', 'suffix', 'house_number', 'street', 'email_add', 'contact_number'),
                     [
-                        // 'resident_id' => $resident->id | retrieve resident id
+                        'resident_id' => $resident->resident_id,
                         'resident_status' => $this->residentStatus,
                         'purpose' => implode(', ', $validated['require_purpose']),
                     ]
@@ -91,7 +102,7 @@ class CurrentResidentRequestDocumentController extends Controller
      */
     public function show($id)
     {
-        $modelsRequest = ModelsRequest::with('documents')->findOrFail($id);
+        $modelsRequest = ModelsRequest::with('documents.business_permit')->findOrFail($id);
 
         if ($modelsRequest->confirmed_at) return redirect()->route('home');
 

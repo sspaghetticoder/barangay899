@@ -22,8 +22,8 @@
     <section class="position-relative" style="min-height: 100vh;">
         <div class="container px-3 px-md-5 position-relative">
             <div class="row px-0 px-lg-5">
-                <h2 class="text-center mt-5 pt-5"><b>Confirmation</b></h2>
-                <p class="text-left">Summary of Request</p>
+                <h2 class="text-center mt-5 pt-5"><b>Request Confirmation</b></h2>
+                <p class="text-left"><b>Summary of Request</b></p>
             </div>
 
             <form id="requests.destroy" action="{{ route('current_resident.requests.destroy', $modelsRequest) }}"
@@ -33,7 +33,7 @@
             </form>
 
             <form id="requests.confirm" action="{{ route('requests.confirm', $modelsRequest) }}" method="POST"
-                class="row g-4 px-0 px-lg-5">
+                class="row g-2 px-0 px-lg-5">
                 @csrf
                 <div class="col-12 col-md-6 ps-lg-5">
                     <label class=""><b>Fullname</b></label>
@@ -65,7 +65,7 @@
                     </p>
                 </div>
 
-                <div class="col-12 col-md-5 col-xl-4">
+                <div class="col-12 {{ in_array("b", $modelsRequest->documents->pluck('document_type')->toArray()) ? "col-md-6" : "col-md-5 col-xl-4" }}">
                     <label><b>Purpose</b></label>
                     <p class="ps-4">
                         @foreach ($modelsRequest->purposes as $document)
@@ -74,6 +74,35 @@
                         @endforeach
                     </p>
                 </div>
+
+                @foreach ($modelsRequest->documents as $document)
+                    @if ($document->business_permit)
+                        <div class="col-12">
+                            <h2 class="text-center mt-2" style="border-top: 1px solid #00BBD9;"><b>&nbsp;</b></h2>
+                            <p class="text-left text-capitalize"><b>Business Permit Details</b></p>
+                        </div>
+        
+                        <div class="col-12 col-md-6 ps-lg-5">
+                            <label class=""><b>Business Name</b></label>
+                            <p class="ps-4">{{ $document->business_permit->business_name ?? 'N/A' }}</p>
+                        </div>
+        
+                        <div class="col-12 col-md-6">
+                            <label class=""><b>Business Owner</b></label>
+                            <p class="ps-4">{{ $document->business_permit->business_owner ?? 'N/A' }}</p>
+                        </div>
+        
+                        <div class="col-12 col-md-6 ps-lg-5">
+                            <label class=""><b>Business Address</b></label>
+                            <p class="ps-4">{{ $document->business_permit->business_add ?? 'N/A' }}</p>
+                        </div>
+        
+                        <div class="col-12 col-md-6">
+                            <label class=""><b>Business Nature</b></label>
+                            <p class="ps-4">{{ $document->business_permit->business_nature ?? 'N/A' }}</p>
+                        </div>
+                    @endif
+                @endforeach
 
                 <div class="col-12">
                     <div class="row position-relative">
@@ -109,7 +138,7 @@
             </div>
 
             <footer class="confirm-footer" id="footer" style="">
-                <div class="">
+                <div class="mb-5">
                     <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
                 </div>
             </footer>

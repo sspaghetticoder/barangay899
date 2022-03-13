@@ -5,8 +5,8 @@
         <li class="nav-item">
             <a class="nav-link ms-4 d-none d-sm-block" href="{{ route('home') }}">Home</a>
             <a class="nav-link ms-4 d-block d-sm-none" href="{{ route('home') }}">
-                <svg xmlns="http://www.w3.org/2000/svg" strokeWidth="2" width="18" height="18" fill="currentColor" class="bi bi-house"
-                    viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" strokeWidth="2" width="18" height="18" fill="currentColor"
+                    class="bi bi-house" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
                         d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
                     <path fill-rule="evenodd"
@@ -21,37 +21,137 @@
     <section class="position-relative" style="min-height: 100vh;">
         <div class="container px-3 px-md-5 position-relative">
             <div class="row px-0 px-lg-5">
-                <h2 class="text-center mt-5 pt-5"><b>Confirmation</b></h2>
-                <p class="text-left">Summary of Request</p>
+                <h2 class="text-center mt-5 pt-5"><b>Personal Background Confirmation</b></h2>
+                <p class="text-left text-uppercase"><b>Basic Information</b></p>
             </div>
 
-            <form id="requests.destroy" action="{{ route('new_resident.requests.destroy', $modelsRequest->resident_id) }}"
-                method="POST">
+            <div class="row">
+                <div class="container px-lg-5 position-relative">
+                    <div class="row px-lg-3">
+                        <div class="col col-12 col-sm-6">
+                            <div class="text-start">
+                                <p class="m-0 p-0"><b>Fullname:</b>
+                                    <span>{{ $modelsRequest->fullName ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0"><b>Address:</b>
+                                    <span>{{ $modelsRequest->address ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0"><b>Email Address:</b>
+                                    <span>{{ $modelsRequest->email_add ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0"><b>Contact Number:</b>
+                                    <span>{{ $modelsRequest->contactNumberFormatted ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0 text-capitalize"><b>Gender:</b>
+                                    <span>{{ $modelsRequest->resident->sex ?? 'NA' }}</span></p>
+                            </div>
+                        </div>
+                        <div class="col col-12 col-sm-6">
+                            <div class="text-start text-sm-end">
+                                <p class="m-0 p-0 text-capitalize"><b>Birthplace:</b>
+                                    <span>{{ $modelsRequest->resident->place_of_birth ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0"><b>Birthdate:</b>
+                                    <span>{{ $modelsRequest->resident->birth_date ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0"><b>Age:</b>
+                                    <span>{{ $modelsRequest->resident->age ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0"><b>Civil Status:</b>
+                                    <span>{{ $modelsRequest->resident->civil_status ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0 text-capitalize"><b>Religion:</b>
+                                    <span>{{ $modelsRequest->resident->religion ?? 'NA' }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row px-0 px-lg-5">
+                <h2 class="text-center mt-2"><b>&nbsp;</b></h2>
+                <p class="text-left text-uppercase"><b>Other Information</b></p>
+            </div>
+
+            <div class="row">
+                <div class="container px-lg-5 position-relative">
+                    <div class="row px-lg-3">
+                        <div class="col col-12 col-sm-4">
+                            <div class="text-start">
+                                <p class="m-0 p-0"><b>Voter Status:</b>
+                                    <span>{{ $modelsRequest->resident->voter_status ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0"><b>Identified As:</b>
+                                    <span>{{ $modelsRequest->resident->identified_as ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0 text-capitalize"><b>Occupation:</b>
+                                    <span>{{ $modelsRequest->resident->occupation ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0"><b>Employment Status:</b>
+                                    <span>{{ $modelsRequest->resident->emp_stat ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0 text-capitalize"><b>Employmer's Name:</b>
+                                    <span>{{ $modelsRequest->resident->emp_name ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0"><b>Monthly Income:</b>
+                                    <span>{{ $modelsRequest->resident->monthlyIncomeFormatted ?? 'NA' }}</span></p>
+                            </div>
+                        </div>
+                        <div class="col col-12 col-sm-4 text-center">
+                            <div style="display: inline-block; text-align: left;">
+                                <p class="m-0 p-0"><b>SSS No.:</b>
+                                    <span>{{ $modelsRequest->resident->sss_no ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0"><b>PAGIBIG No.:</b>
+                                    <span>{{ $modelsRequest->resident->pagibig_no ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0"><b>Philhealth No.:</b>
+                                    <span>{{ $modelsRequest->resident->philhealth_no ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0"><b>GSIS No.:</b>
+                                    <span>{{ $modelsRequest->resident->gsis_no ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0"><b>TIN No.:</b>
+                                    <span>{{ $modelsRequest->resident->tin_no ?? 'NA' }}</span></p>
+                            </div>
+                        </div>
+                        <div class="col col-12 col-sm-4">
+                            <div class="text-start text-sm-end">
+                                <p class="m-0 p-0 text-capitalize"><b>Citizenship:</b>
+                                    <span>{{ $modelsRequest->resident->citizenship ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0 text-capitalize"><b>PWD:</b>
+                                    <span>{{ $modelsRequest->resident->pwd ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0"><b>Years of Residence:</b>
+                                    <span>{{ $modelsRequest->resident->years_of_residence ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0 text-capitalize"><b>4P's Member:</b>
+                                    <span>{{ $modelsRequest->resident->member_4ps ?? 'NA' }}</span></p>
+                                <p class="m-0 p-0 text-capitalize"><b>Blood Type:</b>
+                                    <span>{{ $modelsRequest->resident->blood_type ?? 'NA' }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container px-3 px-md-5 position-relative">
+            <div class="row px-0 px-lg-5">
+                <div class="col-12">
+                    <h2 class="text-center mt-5 pt-5" style="border-top: 1px solid #00BBD9;"><b>Request Confirmation</b></h2>
+                </div>
+                <p class="text-left"><b>Summary of Request</b></p>
+            </div>
+
+            <form id="requests.destroy"
+                action="{{ route('new_resident.requests.destroy', $modelsRequest->resident_id) }}" method="POST">
                 @method('DELETE')
                 @csrf
             </form>
 
             <form id="requests.confirm" action="{{ route('requests.confirm', $modelsRequest) }}" method="POST"
-                class="row g-4 px-0 px-lg-5">
+                class="row g-2 px-0 px-lg-5">
                 @csrf
                 <div class="col-12 col-md-6 ps-lg-5">
                     <label class=""><b>Fullname</b></label>
-                    <p class="ps-4">{{ $modelsRequest->fullName ?? 'N/A' }}</p>
+                    <p class="ps-4">{{ $modelsRequest->fullName ?? 'NA' }}</p>
                 </div>
 
                 <div class="col-12 col-md-6">
                     <label><b>Address</b></label>
-                    <p class="ps-4">{{ $modelsRequest->address ?? 'N/A' }}</p>
+                    <p class="ps-4">{{ $modelsRequest->address ?? 'NA' }}</p>
                 </div>
 
                 <div class="col-12 col-md-6 ps-lg-5">
                     <label><b>Email Address</b></label>
-                    <p class="ps-4">{{ $modelsRequest->email_add ?? 'N/A' }}</p>
+                    <p class="ps-4">{{ $modelsRequest->email_add ?? 'NA' }}</p>
                 </div>
 
                 <div class="col-12 col-md-6">
                     <label><b>Contact Number</b></label>
-                    <p class="ps-4">{{ $modelsRequest->contact_number_formatted ?? 'N/A' }}</p>
+                    <p class="ps-4">{{ $modelsRequest->contact_number_formatted ?? 'NA' }}</p>
                 </div>
 
                 <div class="col-12 col-md-6 ps-lg-5">
@@ -59,20 +159,49 @@
                     <p class="ps-4">
                         @foreach ($modelsRequest->documents as $document)
                             {{ $loop->first ? '' : ', ' }}
-                            <span>{{ $document->name ?? 'N/A' }}</span>
+                            <span>{{ $document->name ?? 'NA' }}</span>
                         @endforeach
                     </p>
                 </div>
 
-                <div class="col-12 col-md-5 col-xl-4">
+                <div class="col-12 {{ in_array("b", $modelsRequest->documents->pluck('document_type')->toArray()) ? "col-md-6" : "col-md-5 col-xl-4" }}">
                     <label><b>Purpose</b></label>
                     <p class="ps-4">
                         @foreach ($modelsRequest->purposes as $document)
                             {{ $loop->first ? '' : ', ' }}
-                            <span>{{ $document ?? 'N/A' }}</span>
+                            <span>{{ $document ?? 'NA' }}</span>
                         @endforeach
                     </p>
                 </div>
+
+                @foreach ($modelsRequest->documents as $document)
+                    @if ($document->business_permit)
+                        <div class="col-12">
+                            <h2 class="text-center mt-2" style="border-top: 1px solid #00BBD9;"><b>&nbsp;</b></h2>
+                            <p class="text-left text-capitalize"><b>Business Permit Details</b></p>
+                        </div>
+        
+                        <div class="col-12 col-md-6 ps-lg-5">
+                            <label class=""><b>Business Name</b></label>
+                            <p class="ps-4">{{ $document->business_permit->business_name ?? 'N/A' }}</p>
+                        </div>
+        
+                        <div class="col-12 col-md-6">
+                            <label class=""><b>Business Owner</b></label>
+                            <p class="ps-4">{{ $document->business_permit->business_owner ?? 'N/A' }}</p>
+                        </div>
+        
+                        <div class="col-12 col-md-6 ps-lg-5">
+                            <label class=""><b>Business Address</b></label>
+                            <p class="ps-4">{{ $document->business_permit->business_add ?? 'N/A' }}</p>
+                        </div>
+        
+                        <div class="col-12 col-md-6">
+                            <label class=""><b>Business Nature</b></label>
+                            <p class="ps-4">{{ $document->business_permit->business_nature ?? 'N/A' }}</p>
+                        </div>
+                    @endif
+                @endforeach
 
                 <div class="col-12">
                     <div class="row position-relative">
@@ -108,7 +237,7 @@
             </div>
 
             <footer class="confirm-footer" id="footer" style="">
-                <div class="">
+                <div class="mb-5">
                     <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
                 </div>
             </footer>
@@ -116,7 +245,7 @@
             <x-modal>
                 <x-slot name="title">
                     @if (\Session::has('Exception'))
-                        {{ \Session::get('Exception')['title'] ?? 'N/A' }}
+                        {{ \Session::get('Exception')['title'] ?? 'NA' }}
                     @else
                         Please Confirm
                     @endif
@@ -124,7 +253,7 @@
 
                 <x-slot name="message">
                     @if (\Session::has('Exception'))
-                        {{ \Session::get('Exception')['message'] ?? 'N/A' }}
+                        {{ \Session::get('Exception')['message'] ?? 'NA' }}
                     @else
                         To continue, please confirm below that the information you gave are true and correct.
                     @endif

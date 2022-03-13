@@ -405,6 +405,11 @@ input[type=email]::placeholder {
     background: #00BBD9;
 }
 
+.notice {
+    position: absolute;
+    top: -17px;
+}
+
 /*-----------------------------------------
     CONTACT or FOOTER
 ------------------------------------------*/

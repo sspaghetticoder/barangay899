@@ -2,13 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Request extends Model
+class Request extends BaseModel
 {
-    use HasFactory;
-
     protected $table = 'request_tbl';
     protected $primaryKey = 'request_id';
     protected $fillable = [
@@ -46,14 +41,14 @@ class Request extends Model
     protected function getFullNameAttribute() : string
     {
         $suffix = $this->suffix ? '('.$this->suffix.')': '';
-
+    
         return "{$this->last_name}, {$this->first_name} {$this->middle_name} {$suffix}";
     }    
 
     protected function getAddressAttribute() : string
     {
-        return "{$this->house_number} {$this->street}";
-    }    
+        return "{$this->house_number}, {$this->street}";
+    }
 
     public function documents()
     {

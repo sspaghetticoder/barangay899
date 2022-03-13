@@ -36,15 +36,39 @@ class NewResidentRequestDocumentController extends Controller
      */
     public function store(storeNewResidentDocumentRequest $request)
     { 
-        if ($request->age <= 0) return redirect()->back()
-            ->withInput($request->all())
-            ->with('showModal', '')
-            ->with('Exception', [
-                'title' => 'Error',
-                'message' => "Invalid Birthdate!",
+        try {
+            $resident = Resident::findRecord($request->last_name, $request->first_name, $request->middle_name, $request->suffix, $request->house_number)->first();
+
+            if (! is_null($resident)) return redirect()->back()->with('showModal', '')
+                    ->withInput($request->all())
+                    ->with('Exception', [
+                        'title' => 'Notice!',
+                        'message' => 'You are currently registered as current resident in our database, please proceed on <a href="'.route("current_resident.requests.create", $resident->resident_id).'" class="text-info"><u>current resident</u></a> form to request for documents.',
+                    ]);
+
+            //validate age
+            if ($request->age <= 0) return redirect()->back()
+                ->withInput($request->all())
+                ->with('showModal', '')
+                ->with('Exception', [
+                    'title' => 'Error',
+                    'message' => "Invalid Birthdate!",
             ]);
 
-        try {
+            //validate requested documents
+            $requestDocuments = new RequestDocuments();
+
+            array_push($requestDocuments->storeRequest['require_document'], $request->cor, $request->coi, $request->bc, $request->bp);
+            array_push($requestDocuments->storeRequest['require_purpose'], $request->sch, $request->pas, $request->gov, $request->has('oth') ? $request->purpose : null);
+
+            $validated = $requestDocuments->validateRequestedDocuments($requestDocuments->storeRequest);
+
+            if (is_string($validated))
+                return redirect()->back()->withInput($request->all())->with(
+                    strtok($validated, $requestDocuments->errorMessageSeparator),
+                    substr($validated, strpos($validated, $requestDocuments->errorMessageSeparator) + 1)
+                );
+
             //create resident
             $resident = Resident::create(array_merge(
                 $request->only(
@@ -52,6 +76,7 @@ class NewResidentRequestDocumentController extends Controller
                     'first_name',
                     'middle_name',
                     'suffix',
+                    'house_number',
                     'alias',
                     'birth_date',
                     'place_of_birth',
@@ -66,7 +91,7 @@ class NewResidentRequestDocumentController extends Controller
                     'voter_status',
                     'identified_as',
                     'email_add',
-                    'emp_stat', //here
+                    'emp_stat',
                     'occupation',
                     'emp_name',
                     'monthly_income',
@@ -79,25 +104,9 @@ class NewResidentRequestDocumentController extends Controller
                     'gsis_no',
                     'pagibig_no',
                     'philhealth_no',
-                ),
-                [
-                    'resident_status' => $this->residentStatus,
-                    'contact_no' => $request->contact_number,
-                ]
+                ), 
+                ['contact_no' => $request->contact_number]
             ));
-
-            $requestDocuments = new RequestDocuments();
-
-            array_push($requestDocuments->storeRequest['require_document'], $request->cor, $request->coi, $request->bc, $request->bp);
-            array_push($requestDocuments->storeRequest['require_purpose'], $request->sch, $request->pas, $request->gov, $request->has('oth') ? $request->purpose : null);
-
-            $validated = $requestDocuments->validateRequestedDocuments($requestDocuments->storeRequest);
-
-            if (is_string($validated))
-                return redirect()->back()->withInput($request->all())->with(
-                    strtok($validated, $requestDocuments->errorMessageSeparator),
-                    substr($validated, strpos($validated, $requestDocuments->errorMessageSeparator) + 1)
-                );
 
             $modelsRequest = ModelsRequest::create(
                 array_merge(
@@ -135,7 +144,7 @@ class NewResidentRequestDocumentController extends Controller
      */
     public function show($id)
     {
-        $modelsRequest = ModelsRequest::with('documents')->findOrFail($id);
+        $modelsRequest = ModelsRequest::with('documents', 'resident')->findOrFail($id);
 
         if ($modelsRequest->confirmed_at) return redirect()->route('home');
 

@@ -3,13 +3,9 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Resident extends Model
+class Resident extends BaseModel
 {
-    use HasFactory;
-
     protected $table = 'resident_tbl';
     protected $primaryKey = 'resident_id';
     protected $fillable = [
@@ -17,6 +13,7 @@ class Resident extends Model
         'first_name',
         'middle_name',
         'suffix',
+        'house_number',
         'alias',
         'sex',
         'birth_date',
@@ -45,12 +42,31 @@ class Resident extends Model
         'gsis_no',
         'pagibig_no',
         'philhealth_no',
-        'resident_status',
+        // 'resident_status',
     ];
+
+    public function scopeFindRecord($query, string $lastName = '', string $firstName = '', string $middleName = '', string $suffix = '', string $houseNumber = '')
+    {
+        return $query->where('last_name', $lastName)
+            ->where('first_name', $firstName)
+            ->where('middle_name', $middleName)
+            ->where('suffix', $suffix)
+            ->where('house_number', $houseNumber);
+    }
+
+    public function getMonthlyIncomeFormattedAttribute()
+    {
+        return 'P'.number_format($this->attributes['monthly_income']);
+    }
 
     public function getAgeAttribute()
     {
         return Carbon::parse($this->attributes['birth_date'])->age;
+    }
+
+    public function getBirthDateAttribute()
+    {
+        return Carbon::parse($this->attributes['birth_date'])->format('m/d/Y');
     }
 
     public function setBirthDateAttribute($value)

@@ -19,6 +19,7 @@ class CreateResidentsTable extends Migration
             $table->string('first_name');
             $table->string('middle_name');
             $table->char('suffix', 100)->nullable();
+            $table->string('house_number');
             $table->string('alias')->nullable();
             $table->string('sex');
             $table->date('birth_date');
@@ -47,7 +48,7 @@ class CreateResidentsTable extends Migration
             $table->string('gsis_no')->nullable();
             $table->string('pagibig_no')->nullable();
             $table->string('philhealth_no')->nullable();
-            $table->string('resident_status');
+            // $table->string('resident_status');
             $table->timestamps();
         });
     }

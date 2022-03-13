@@ -21,5 +21,6 @@ Route::get('/', function() {
 
 Route::post('current-resident/requests/confirm/{id}', [CurrentResidentRequestDocumentController::class, 'confirm'])->name('requests.confirm');
 Route::resource('current-resident/requests', CurrentResidentRequestDocumentController::class, ['as' => 'current_resident'])->except(['index', 'edit', 'update']);
+Route::get('current-resident/requests/create/{id?}', [CurrentResidentRequestDocumentController::class, 'create'])->name('current_resident.requests.create');
 
 Route::resource('new-resident/requests', NewResidentRequestDocumentController::class, ['as' => 'new_resident'])->except(['index', 'edit', 'update']);

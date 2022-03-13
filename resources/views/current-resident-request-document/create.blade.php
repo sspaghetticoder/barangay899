@@ -36,7 +36,7 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('last_name') is-invalid @enderror grayed"
-                        name="last_name" placeholder="Lastname" value="{{ old('last_name') }}" required>
+                        name="last_name" placeholder="Lastname" value="{{ $resident->last_name ?? old('last_name') }}" required>
 
                     @error('last_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -46,7 +46,7 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('first_name') is-invalid @enderror grayed"
-                        name="first_name" placeholder="Firstname" value="{{ old('first_name') }}" required>
+                        name="first_name" placeholder="Firstname" value="{{ $resident->first_name ?? old('first_name') }}" required>
 
                     @error('first_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -54,9 +54,11 @@
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
+                    <label for="middle_name" class="notice" style="font-size: 11px;"><span class="text-danger"><b>*</b></span>Put N/A if not applicable.</label>
+
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('middle_name') is-invalid @enderror grayed"
-                        name="middle_name" placeholder="Middlename" value="{{ old('middle_name') }}" required>
+                        name="middle_name" id="middle_name" placeholder="Middlename" value="{{ $resident->middle_name ?? old('middle_name') }}" required>
 
                     @error('middle_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -65,13 +67,13 @@
 
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off" class="form-control border border-secondary grayed"
-                        name="suffix" placeholder="Suffix(Optional)" value="{{ old('suffix') }}">
+                        name="suffix" placeholder="Suffix(Optional)" value="{{ $resident->suffix ?? old('suffix') }}">
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('house_number') is-invalid @enderror grayed"
-                        name="house_number" placeholder="House Number" value="{{ old('house_number') }}" required>
+                        name="house_number" placeholder="House Number" value="{{ $resident->house_number ?? old('house_number') }}" required>
 
                     @error('house_number')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -81,7 +83,7 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('street') is-invalid @enderror grayed"
-                        name="street" placeholder="Street" value="{{ old('street') }}" required>
+                        name="street" placeholder="Street" value="{{ $resident->street_name ?? old('street') }}" required>
 
                     @error('street')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -92,7 +94,7 @@
                     <input type="email" autocomplete="off" title="Example: sample@gmail.com"
                         pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
                         class="form-control border border-secondary @error('email_add') is-invalid @enderror grayed"
-                        name="email_add" placeholder="Email Address" value="{{ old('email_add') }}" required>
+                        name="email_add" placeholder="Email Address" value="{{ $resident->email_add ?? old('email_add') }}" required>
                     @error('email_add')
                         <div class="invalid-tooltip">{{ $message }}</div>
                     @enderror
@@ -101,7 +103,7 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="text"
                         class="form-control border border-secondary @error('contact_number') is-invalid @enderror grayed"
-                        name="contact_number" placeholder="Contact Number" value="{{ old('contact_number') }}" required>
+                        name="contact_number" placeholder="Contact Number" value="{{ $resident->contact_no ?? old('contact_number') }}" required>
 
                     @error('contact_number')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -285,7 +287,7 @@
             </x-slot>
 
             <x-slot name="message">
-                {{ \Session::get('Exception')['message'] ?? 'N/A' }}
+                {!! \Session::get('Exception')['message'] ?? 'N/A' !!}
             </x-slot>
 
             <button type="button" class="btn btn-primary px-4 form-btn btn-next border-0 main-cta"
@@ -296,15 +298,7 @@
 
 {{-- push this script to @stack --}}
 @push('scripts')
-    <script defer>
-        function preventBack() {
-            window.history.forward();
-        }
-        window.onunload = function() {
-            null;
-        };
-        setTimeout("preventBack()", 0);
-    </script>
+    <script src="{{ url('js/prevent-back.js') }}" defer></script>
 
     <script src="{{ url('js/custom-dropdown.js') }}" defer></script>
 
