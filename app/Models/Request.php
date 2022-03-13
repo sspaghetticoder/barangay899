@@ -40,7 +40,7 @@ class Request extends BaseModel
 
     protected function getFullNameAttribute() : string
     {
-        $suffix = $this->suffix ? '('.$this->suffix.')': '';
+        $suffix = trim($this->suffix) ? '('.$this->suffix.')': '';
     
         return "{$this->last_name}, {$this->first_name} {$this->middle_name} {$suffix}";
     }    
