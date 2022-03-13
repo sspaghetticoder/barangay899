@@ -45,7 +45,7 @@ class Resident extends BaseModel
         // 'resident_status',
     ];
 
-    public function scopeFindRecord($query, string $lastName = '', string $firstName = '', string $middleName = '', string $suffix = '', string $houseNumber = '')
+    public function scopeFindRecord($query, string $lastName = '', string $firstName = '', string $middleName = '', ?string $suffix = null, string $houseNumber = '')
     {
         return $query->where('last_name', $lastName)
             ->where('first_name', $firstName)
