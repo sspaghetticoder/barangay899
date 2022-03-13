@@ -47,11 +47,11 @@ class Resident extends BaseModel
 
     public function scopeFindRecord($query, string $lastName = '', string $firstName = '', string $middleName = '', ?string $suffix = null, string $houseNumber = '')
     {
-        return $query->where('last_name', $lastName)
-            ->where('first_name', $firstName)
-            ->where('middle_name', $middleName)
-            ->where('suffix', $suffix)
-            ->where('house_number', $houseNumber);
+        return $query->where('last_name', $this->customUcWords($lastName))
+            ->where('first_name', $this->customUcWords($firstName))
+            ->where('middle_name', $this->customUcWords($middleName))
+            ->where('suffix', $this->customUcWords($suffix))
+            ->where('house_number', $this->customUcWords($houseNumber));
     }
 
     public function getMonthlyIncomeFormattedAttribute()
