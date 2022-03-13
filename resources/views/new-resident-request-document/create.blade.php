@@ -435,7 +435,13 @@
                     @enderror
                 </div>
 
+                <div class="col-12 d-block d-md-none">
+                    <label for="multiselect-wrapper" class="position-relative" style="font-size: 11px; word-wrap: break-word;"><span class="text-danger"><b>*</b></span>Please specify the purpose if you are requesting for more than 1(one) document on the “others” field.</label>
+                </div>
+
                 <div class="col-12 col-lg-9 position-relative">
+                    <label for="multiselect-wrapper" class="notice d-none d-md-block" style="font-size: 11px; word-wrap: break-word;"><span class="text-danger"><b>*</b></span>Please specify the purpose if you are requesting for more than 1(one) document on the “others” field.</label>
+
                     <div class="multiselect-wrapper">
                         <div class="position-relative select-list">
                             <div class="title title-barangay-documents">Select any barangay document you want to request
@@ -454,14 +460,14 @@
                                     <label for="coi">Certificate of Indigency</label>
                                 </div>
                                 <div class="option">
-                                    <input type="checkbox" name="bc" id="bc" value="c"
+                                    <input form="requests.store" type="checkbox" name="bc" id="bc" value="c"
                                         data-document="Barangay Clearance"
                                         class="barangay-document custom-dropdown-option"
                                         @if (old('bc')) checked @endif />
                                     <label for="bc">Barangay Clearance</label>
                                 </div>
                                 <div class="option">
-                                    <input form="requests.store" type="checkbox" name="bp" id="bp" value="b" <input
+                                    <input form="requests.store" type="checkbox" name="bp" id="bp" value="b"
                                         type="checkbox" name="bp" id="bp" value="b" data-document="Business Permit"
                                         class="barangay-document" @if (old('bp')) checked @endif />
                                     <label for="bp">Business Permit</label>
@@ -545,6 +551,12 @@
                                         value="For Government Purposes" data-purpose="For Government Purposes"
                                         class="request-purpose" @if (old('gov')) checked @endif />
                                     <label for="government">For Government Purposes</label>
+                                </div>
+                                <div class="option">
+                                    <input form="requests.store" type="checkbox" name="lto" id="business"
+                                        value="License to Operate (For Business Permits Only)" data-purpose="License to Operate (For Business Permits Only)"
+                                        class="request-purpose" @if (old('lto')) checked @endif/>
+                                    <label for="business" id="label-business" style="cursor: disabled; pointer-events: none;">License to Operate (For Business Permits Only)</label>
                                 </div>
                                 <div class="option">
                                     <input form="requests.store" type="checkbox" name="oth" id="others"

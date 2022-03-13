@@ -59,7 +59,7 @@ class NewResidentRequestDocumentController extends Controller
             $requestDocuments = new RequestDocuments();
 
             array_push($requestDocuments->storeRequest['require_document'], $request->cor, $request->coi, $request->bc, $request->bp);
-            array_push($requestDocuments->storeRequest['require_purpose'], $request->sch, $request->pas, $request->gov, $request->has('oth') ? $request->purpose : null);
+            array_push($requestDocuments->storeRequest['require_purpose'], $request->sch, $request->pas, $request->gov, $request->lto, $request->has('oth') ? $request->purpose : null);
 
             $validated = $requestDocuments->validateRequestedDocuments($requestDocuments->storeRequest);
 

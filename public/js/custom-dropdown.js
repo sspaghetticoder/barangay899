@@ -58,8 +58,8 @@ function updateTable() {
     var isChecked = $(this).is(':checked');
 }
 
-// append to title when checked.
 $(function () {
+    // append to title when checked.
     function appendCheckboxToTitle(className, dataAttribute, selectTitle, title) {
         var documents = $("." + className + ":checked").map(function () {
             return $(this).data(dataAttribute);
@@ -99,5 +99,49 @@ $(function () {
     });
 
     appendCheckboxToTitle(selectRequestPurpose, purposeAttribute, purposeSelecTitle, purposeDefaulTitle);
+
+    //toggle options (via business permit checkbox option and others input field)
+    function disableLabel(elem, isDisabled) {
+        elem.css({
+            "cursor": isDisabled ? "disabled" : "auto",
+            "pointer-events": isDisabled ? "none" : "auto",
+        });
+    }
+
+    disableLabel($('#label-business'), true);
+
+    $('.'+selectBarangayDocuments).click(function() {
+        var dropdown = $('.'+purposeSelecTitle);
+
+        function unselectall() {
+            $('.request-purpose').each(function(i, obj) {
+                if (this.checked) $(this).trigger('click');
+            });
+        }
+
+        if ($('.'+selectBarangayDocuments+':checkbox:checked').length >= 2) {
+            unselectall();
+
+            $('#others').trigger('click');
+
+            disableLabel(dropdown, true);
+        } else if ($('.'+selectBarangayDocuments+':checkbox:checked').length == 1 && $('#bp').is(':checked') && ! $('#business').is(':checked')) {
+            unselectall();
+
+            $('#business').trigger('click');
+
+            disableLabel(dropdown, true);
+        } else if ($('.'+selectBarangayDocuments+':checkbox:checked').length == 1 && ! $('#bp').is(':checked')) {
+            disableLabel(dropdown, false);
+        } else {
+            unselectall();
+
+            if ($('#others').is(':checked')) $('#others').trigger('click');
+            
+            disableLabel(dropdown, false);
+
+            disableLabel($('#label-business'), true);
+        }
+    });
 });
 

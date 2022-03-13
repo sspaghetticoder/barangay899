@@ -224,6 +224,12 @@
                                     <label for="government">For Government Purposes</label>
                                 </div>
                                 <div class="option">
+                                    <input type="checkbox" name="lto" id="business"
+                                        value="License to Operate (For Business Permits Only)" data-purpose="License to Operate (For Business Permits Only)"
+                                        class="request-purpose" @if (old('lto')) checked @endif/>
+                                    <label for="business" id="label-business" style="cursor: disabled; pointer-events: none;">License to Operate (For Business Permits Only)</label>
+                                </div>
+                                <div class="option">
                                     <input type="checkbox" name="oth" id="others" data-purpose="Others (Please specify)"
                                         class="request-purpose" @if (old('oth')) checked @endif />
                                     <label for="others">Others (Please specify)</label>
