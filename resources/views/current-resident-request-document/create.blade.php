@@ -110,7 +110,13 @@
                     @enderror
                 </div>
 
+                <div class="col-12 d-block d-md-none">
+                    <label for="multiselect-wrapper" class="position-relative" style="font-size: 11px; word-wrap: break-word;"><span class="text-danger"><b>*</b></span>Please specify the purpose if you are requesting for more than 1(one) document on the “others” field.</label>
+                </div>
+
                 <div class="col-12 col-lg-9 position-relative">
+                    <label for="multiselect-wrapper" class="notice d-none d-md-block" style="font-size: 11px; word-wrap: break-word;"><span class="text-danger"><b>*</b></span>Please specify the purpose if you are requesting for more than 1(one) document on the “others” field.</label>
+
                     <div class="multiselect-wrapper">
                         <div class="position-relative select-list" style="height: min-content">
                             <div class="title title-barangay-documents">Select any barangay document you want to request
