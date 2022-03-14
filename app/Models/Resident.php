@@ -42,7 +42,6 @@ class Resident extends BaseModel
         'gsis_no',
         'pagibig_no',
         'philhealth_no',
-        // 'resident_status',
     ];
 
     public function scopeFindRecord($query, string $lastName = '', string $firstName = '', string $middleName = '', ?string $suffix = null, string $houseNumber = '')

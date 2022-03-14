@@ -12,10 +12,12 @@ use Illuminate\Http\Request;
 class NewResidentRequestDocumentController extends Controller
 {
     protected string $residentStatus = '';
+    protected string $prevUrl = '';
 
     public function __construct()
     {
         $this->residentStatus = (new ModelsRequest())->resident_statuses['new_resident'];
+        $this->prevUrl = '?' . substr(url()->previous(), strpos(url()->previous(), "?") + 1);
     }
 
     /**
@@ -35,16 +37,16 @@ class NewResidentRequestDocumentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(storeNewResidentDocumentRequest $request)
-    { 
+    {
         try {
             $resident = Resident::findRecord($request->last_name, $request->first_name, $request->middle_name, $request->suffix, $request->house_number)->first();
 
-            if (! is_null($resident)) return redirect()->back()->with('showModal', '')
-                    ->withInput($request->all())
-                    ->with('Exception', [
-                        'title' => 'Notice!',
-                        'message' => 'You are currently registered as current resident in our database, please proceed on <a href="'.route("current_resident.requests.create", $resident->resident_id).'" class="text-info"><u>current resident</u></a> form to request for documents.',
-                    ]);
+            if (!is_null($resident)) return redirect()->back()->with('showModal', '')
+                ->withInput($request->all())
+                ->with('Exception', [
+                    'title' => 'Notice!',
+                    'message' => 'You are currently registered as current resident in our database, please proceed on <a href="' . route("current_resident.requests.create", $resident->resident_id) . '" class="text-info"><u>current resident</u></a> form to request for documents.',
+                ]);
 
             //validate age
             if ($request->age <= 0) return redirect()->back()
@@ -53,7 +55,7 @@ class NewResidentRequestDocumentController extends Controller
                 ->with('Exception', [
                     'title' => 'Error',
                     'message' => "Invalid Birthdate!",
-            ]);
+                ]);
 
             //validate requested documents
             $requestDocuments = new RequestDocuments();
@@ -104,7 +106,7 @@ class NewResidentRequestDocumentController extends Controller
                     'gsis_no',
                     'pagibig_no',
                     'philhealth_no',
-                ), 
+                ),
                 ['contact_no' => $request->contact_number]
             ));
 
@@ -136,6 +138,94 @@ class NewResidentRequestDocumentController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $resident = Resident::findOrFail($id);
+
+        $latestRequest = $resident->requests()->latest()->first();
+
+        if ($latestRequest->confirmed_at) return redirect()->route('home');
+
+        $document = null;
+
+        foreach ($latestRequest->documents as $doc) {
+            if ($doc->business_permit) $document = $doc;
+        }
+
+        return view('new-resident-request-document.edit', compact('resident', 'latestRequest', 'document'));
+    }
+
+    public function update($id, storeNewResidentDocumentRequest $request)
+    {
+        try {
+            $residentOrig = Resident::findRecord($request->last_name, $request->first_name, $request->middle_name, $request->suffix, $request->house_number)->first();
+
+            $modelsRequest = ModelsRequest::findOrFail($id);
+
+            if ($modelsRequest->confirmed_at) return redirect()->route('home');
+
+            $resident = $modelsRequest->resident;
+
+            if (!is_null($residentOrig)) return redirect()->back()->with('showModal', '')
+                ->withInput($request->all())
+                ->with('Exception', [
+                    'title' => 'Notice!',
+                    'message' => 'You are currently registered as current resident in our database, please proceed on <a href="' . route("new_resident.requests.current", $resident->resident_id) . '" class="text-info"><u>current resident</u></a> form to request for documents.',
+                ]);
+
+            $oldRequest = $modelsRequest;
+
+            if ($request->age <= 0) return redirect()->back()
+                ->withInput($request->all())
+                ->with('showModal', '')
+                ->with('Exception', [
+                    'title' => 'Error',
+                    'message' => "Invalid Birthdate!",
+                ]);
+
+            $requestDocuments = new RequestDocuments();
+
+            array_push($requestDocuments->storeRequest['require_document'], $request->cor, $request->coi, $request->bc, $request->bp);
+            array_push($requestDocuments->storeRequest['require_purpose'], $request->sch, $request->pas, $request->gov, $request->lto, $request->has('oth') ? $request->purpose : null);
+
+            $validated = $requestDocuments->validateRequestedDocuments($requestDocuments->storeRequest);
+
+            if (is_string($validated))
+                return redirect()->back()->withInput($request->all())->with(
+                    strtok($validated, $requestDocuments->errorMessageSeparator),
+                    substr($validated, strpos($validated, $requestDocuments->errorMessageSeparator) + 1)
+                );
+
+            $modelsRequest = ModelsRequest::create(
+                array_merge(
+                    $request->only('last_name', 'first_name', 'middle_name', 'suffix', 'house_number', 'email_add', 'contact_number', 'name_of_witness'),
+                    [
+                        'resident_id' => $resident->resident_id,
+                        'street' => $request->street_name,
+                        'resident_status' => $this->residentStatus,
+                        'purpose' => implode(', ', $validated['require_purpose']),
+                    ]
+                )
+            );
+
+            $requestDocuments->createRequestedDocuments(
+                $modelsRequest,
+                $validated['require_document'],
+                array((new Document())->barangayDocuments['b'] => $request->only('business_name', 'business_nature', 'business_owner', 'business_add'))
+            );
+
+            $oldRequest->delete();
+
+            return redirect()->route('new_resident.requests.show', $modelsRequest);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('showModal', '')
+                ->with('Exception', [
+                    'title' => 'Error',
+                    'message' => $e->getMessage(),
+                ]);
+        }
+    }
+
     /**
      * Display the specified resource.
      *
@@ -146,11 +236,13 @@ class NewResidentRequestDocumentController extends Controller
     {
         $modelsRequest = ModelsRequest::with('documents', 'resident')->findOrFail($id);
 
+        $url = $this->prevUrl;
+
         if ($modelsRequest->confirmed_at) return redirect()->route('home');
 
         if ($modelsRequest->resident_status != $this->residentStatus) abort(404);
 
-        return view('new-resident-request-document.show', compact('modelsRequest'));
+        return view('new-resident-request-document.show', compact('modelsRequest', 'url'));
     }
 
     /**
@@ -163,6 +255,15 @@ class NewResidentRequestDocumentController extends Controller
     {
         Resident::findOrFail($id)->delete();
 
-        return redirect()->route('new_resident.requests.create');
+        return redirect()->route('home');
+
+        // return redirect()->route('new_resident.requests.create');
+    }
+
+    public function current($id)
+    {
+        Resident::findOrFail($id)->delete();
+
+        return redirect()->route('current_resident.requests.create');
     }
 }

@@ -26,6 +26,12 @@
                 <p class="text-left">Please fill out all the necessary fields.</p>
             </div>
 
+            <form id="requests.destroy" action="{{ route('current_resident.requests.destroy', $latestRequest) }}"
+                method="POST">
+                @method('DELETE')
+                @csrf
+            </form>
+
             <form action="{{ route('current_resident.requests.update', $latestRequest) }}" method="POST" class="row g-4 px-0 px-lg-5">
                 @method('PATCH')
                 @csrf
@@ -270,7 +276,10 @@
                         <div class="col-12 col-lg-6 pt-5">
                             <div class="row">
                                 <div class="col-12 col-md-3 col-lg-4">
-                                    <a href="{{ route('current_resident.requests.show', $latestRequest) }}" class="w-100 btn btn-primary form-btn btn-cancel main-cta">Cancel</a>
+                                    {{-- <a href="{{ route('current_resident.requests.show', $latestRequest) }}" class="w-100 btn btn-primary form-btn btn-cancel main-cta">Cancel</a> --}}
+
+                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0 main-cta"
+                                    value=" Back " form="requests.destroy">
                                 </div>
                                 <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
                                     <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0 main-cta"

@@ -125,11 +125,11 @@
                 <p class="text-left"><b>Summary of Request</b></p>
             </div>
 
-            <form id="requests.destroy"
+            {{-- <form id="requests.destroy"
                 action="{{ route('new_resident.requests.destroy', $modelsRequest->resident_id) }}" method="POST">
                 @method('DELETE')
                 @csrf
-            </form>
+            </form> --}}
 
             <form id="requests.confirm" action="{{ route('requests.confirm', $modelsRequest) }}" method="POST"
                 class="row g-2 px-0 px-lg-5">
@@ -219,12 +219,13 @@
                         <div class="col-12 col-lg-6 pt-5">
                             <div class="row">
                                 <div class="col-12 col-md-3 col-lg-4">
-                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0 main-cta"
-                                        value=" Back " form="requests.destroy">
+                                    <a href="{{ route('new_resident.requests.edit', $modelsRequest->resident).$url }}" class="w-100 btn btn-primary form-btn btn-cancel main-cta">Cancel</a>
+                                    {{-- <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0 main-cta"
+                                        value=" Back " form="requests.destroy"> --}}
                                 </div>
                                 <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
                                     <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0 main-cta"
-                                        value="Submit" form="requests.confirm">
+                                        value="Submit" id="submit-btn" form="requests.confirm">
                                 </div>
                             </div>
                         </div>
@@ -274,6 +275,8 @@
 @endsection
 
 @push('scripts')
+    <script src="{{ url('js/certify.js') }}"></script>
+
     @error('certify')
         <script defer>
             $(document).ready(function() {

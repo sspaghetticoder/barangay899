@@ -106,7 +106,7 @@ class CurrentResidentRequestDocumentController extends Controller
 
         $document = null;
 
-        foreach($latestRequest->documents as $doc) {
+        foreach ($latestRequest->documents as $doc) {
             if ($doc->business_permit) $document = $doc;
         }
 
@@ -116,6 +116,15 @@ class CurrentResidentRequestDocumentController extends Controller
     public function update($id, storeCurrentResidentDocumentRequest $request)
     {
         try {
+            $resident = Resident::findRecord($request->last_name, $request->first_name, $request->middle_name, $request->suffix, $request->house_number)->first();
+
+            if (is_null($resident)) return redirect()->back()->with('showModal', '')
+                ->withInput($request->all())
+                ->with('Exception', [
+                    'title' => 'Notice!',
+                    'message' => 'Your records or personal information is not yet in the database please proceed to <a href="' . route("current_resident.requests.new", $id) . '" class="text-info"><u>new resident</u></a> to fillout the form',
+                ]);
+
             $modelsRequest = ModelsRequest::findOrFail($id);
 
             if ($modelsRequest->confirmed_at) return redirect()->route('home');
@@ -206,6 +215,15 @@ class CurrentResidentRequestDocumentController extends Controller
     {
         ModelsRequest::findOrFail($id)->delete();
 
-        return redirect()->route('current_resident.requests.create');
+        return redirect()->route('home');
+
+        // return redirect()->route('current_resident.requests.create');
+    }
+
+    public function new($id)
+    {
+        ModelsRequest::findOrFail($id)->delete();
+
+        return redirect()->route('new_resident.requests.create');
     }
 }
