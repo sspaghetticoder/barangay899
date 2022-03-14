@@ -31,29 +31,29 @@
                         <div class="col col-12 col-sm-6">
                             <div class="text-start">
                                 <p class="m-0 p-0"><b>Fullname:</b>
-                                    <span>{{ $modelsRequest->fullName ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->fullName ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0"><b>Address:</b>
-                                    <span>{{ $modelsRequest->address ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->address ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0"><b>Email Address:</b>
-                                    <span>{{ $modelsRequest->email_add ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->email_add ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0"><b>Contact Number:</b>
-                                    <span>{{ $modelsRequest->contactNumberFormatted ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->contactNumberFormatted ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0 text-capitalize"><b>Gender:</b>
-                                    <span>{{ $modelsRequest->resident->sex ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->sex ?? 'N/A' }}</span></p>
                             </div>
                         </div>
                         <div class="col col-12 col-sm-6">
                             <div class="text-start text-sm-end">
                                 <p class="m-0 p-0 text-capitalize"><b>Birthplace:</b>
-                                    <span>{{ $modelsRequest->resident->place_of_birth ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->place_of_birth ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0"><b>Birthdate:</b>
-                                    <span>{{ $modelsRequest->resident->birth_date ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->birth_date ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0"><b>Age:</b>
-                                    <span>{{ $modelsRequest->resident->age ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->age ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0"><b>Civil Status:</b>
-                                    <span>{{ $modelsRequest->resident->civil_status ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->civil_status ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0 text-capitalize"><b>Religion:</b>
-                                    <span>{{ $modelsRequest->resident->religion ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->religion ?? 'N/A' }}</span></p>
                             </div>
                         </div>
                     </div>
@@ -71,45 +71,45 @@
                         <div class="col col-12 col-sm-4">
                             <div class="text-start">
                                 <p class="m-0 p-0"><b>Voter Status:</b>
-                                    <span>{{ $modelsRequest->resident->voter_status ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->voter_status ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0"><b>Identified As:</b>
-                                    <span>{{ $modelsRequest->resident->identified_as ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->identified_as ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0 text-capitalize"><b>Occupation:</b>
-                                    <span>{{ $modelsRequest->resident->occupation ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->occupation ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0"><b>Employment Status:</b>
-                                    <span>{{ $modelsRequest->resident->emp_stat ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->emp_stat ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0 text-capitalize"><b>Employmer's Name:</b>
-                                    <span>{{ $modelsRequest->resident->emp_name ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->emp_name ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0"><b>Monthly Income:</b>
-                                    <span>{{ $modelsRequest->resident->monthlyIncomeFormatted ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->monthlyIncomeFormatted ?? 'N/A' }}</span></p>
                             </div>
                         </div>
                         <div class="col col-12 col-sm-4 text-center">
                             <div style="display: inline-block; text-align: left;">
                                 <p class="m-0 p-0"><b>SSS No.:</b>
-                                    <span>{{ $modelsRequest->resident->sss_no ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->sss_no ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0"><b>PAGIBIG No.:</b>
-                                    <span>{{ $modelsRequest->resident->pagibig_no ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->pagibig_no ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0"><b>Philhealth No.:</b>
-                                    <span>{{ $modelsRequest->resident->philhealth_no ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->philhealth_no ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0"><b>GSIS No.:</b>
-                                    <span>{{ $modelsRequest->resident->gsis_no ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->gsis_no ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0"><b>TIN No.:</b>
-                                    <span>{{ $modelsRequest->resident->tin_no ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->tin_no ?? 'N/A' }}</span></p>
                             </div>
                         </div>
                         <div class="col col-12 col-sm-4">
                             <div class="text-start text-sm-end">
                                 <p class="m-0 p-0 text-capitalize"><b>Citizenship:</b>
-                                    <span>{{ $modelsRequest->resident->citizenship ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->citizenship ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0 text-capitalize"><b>PWD:</b>
-                                    <span>{{ $modelsRequest->resident->pwd ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->pwd ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0"><b>Years of Residence:</b>
-                                    <span>{{ $modelsRequest->resident->years_of_residence ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->years_of_residence ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0 text-capitalize"><b>4P's Member:</b>
-                                    <span>{{ $modelsRequest->resident->member_4ps ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->member_4ps ?? 'N/A' }}</span></p>
                                 <p class="m-0 p-0 text-capitalize"><b>Blood Type:</b>
-                                    <span>{{ $modelsRequest->resident->blood_type ?? 'NA' }}</span></p>
+                                    <span>{{ $modelsRequest->resident->blood_type ?? 'N/A' }}</span></p>
                             </div>
                         </div>
                     </div>
@@ -136,22 +136,22 @@
                 @csrf
                 <div class="col-12 col-md-6 ps-lg-5">
                     <label class=""><b>Fullname</b></label>
-                    <p class="ps-4">{{ $modelsRequest->fullName ?? 'NA' }}</p>
+                    <p class="ps-4">{{ $modelsRequest->fullName ?? 'N/A' }}</p>
                 </div>
 
                 <div class="col-12 col-md-6">
                     <label><b>Address</b></label>
-                    <p class="ps-4">{{ $modelsRequest->address ?? 'NA' }}</p>
+                    <p class="ps-4">{{ $modelsRequest->address ?? 'N/A' }}</p>
                 </div>
 
                 <div class="col-12 col-md-6 ps-lg-5">
                     <label><b>Email Address</b></label>
-                    <p class="ps-4">{{ $modelsRequest->email_add ?? 'NA' }}</p>
+                    <p class="ps-4">{{ $modelsRequest->email_add ?? 'N/A' }}</p>
                 </div>
 
                 <div class="col-12 col-md-6">
                     <label><b>Contact Number</b></label>
-                    <p class="ps-4">{{ $modelsRequest->contact_number_formatted ?? 'NA' }}</p>
+                    <p class="ps-4">{{ $modelsRequest->contact_number_formatted ?? 'N/A' }}</p>
                 </div>
 
                 <div class="col-12 col-md-6 ps-lg-5">
@@ -159,7 +159,7 @@
                     <p class="ps-4">
                         @foreach ($modelsRequest->documents as $document)
                             {{ $loop->first ? '' : ', ' }}
-                            <span>{{ $document->name ?? 'NA' }}</span>
+                            <span>{{ $document->name ?? 'N/A' }}</span>
                         @endforeach
                     </p>
                 </div>
@@ -169,7 +169,7 @@
                     <p class="ps-4">
                         @foreach ($modelsRequest->purposes as $document)
                             {{ $loop->first ? '' : ', ' }}
-                            <span>{{ $document ?? 'NA' }}</span>
+                            <span>{{ $document ?? 'N/A' }}</span>
                         @endforeach
                     </p>
                 </div>
@@ -246,7 +246,7 @@
             <x-modal>
                 <x-slot name="title">
                     @if (\Session::has('Exception'))
-                        {{ \Session::get('Exception')['title'] ?? 'NA' }}
+                        {{ \Session::get('Exception')['title'] ?? 'N/A' }}
                     @else
                         Please Confirm
                     @endif
@@ -254,7 +254,7 @@
 
                 <x-slot name="message">
                     @if (\Session::has('Exception'))
-                        {{ \Session::get('Exception')['message'] ?? 'NA' }}
+                        {{ \Session::get('Exception')['message'] ?? 'N/A' }}
                     @else
                         To continue, please confirm below that the information you gave are true and correct.
                     @endif
