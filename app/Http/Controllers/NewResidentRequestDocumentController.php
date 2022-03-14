@@ -166,11 +166,14 @@ class NewResidentRequestDocumentController extends Controller
 
             $resident = $modelsRequest->resident;
 
-            if (!is_null($residentOrig)) return redirect()->back()->with('showModal', '')
+            if (!is_null($residentOrig)
+                && ($residentOrig->last_name !== $modelsRequest->last_name && $residentOrig->first_name !== $modelsRequest->first_name 
+                    && $residentOrig->middle_name !== $modelsRequest->middle_name && $residentOrig->suffix !== $modelsRequest->suffix 
+                        && $residentOrig->house_number !== $modelsRequest->house_number)) return redirect()->back()->with('showModal', '')
                 ->withInput($request->all())
                 ->with('Exception', [
                     'title' => 'Notice!',
-                    'message' => 'You are currently registered as current resident in our database, please proceed on <a href="' . route("new_resident.requests.current", $resident->resident_id) . '" class="text-info"><u>current resident</u></a> form to request for documents.',
+                    'message' => 'You are currently registered as current resident in our database, please proceed on <a href="' . route("new_resident.requests.current", ['id' => $resident->resident_id, 'idOrig' => $residentOrig->resident_id]) . '" class="text-info"><u>current resident</u></a> form to request for documents.',
                 ]);
 
             $oldRequest = $modelsRequest;
@@ -260,10 +263,10 @@ class NewResidentRequestDocumentController extends Controller
         // return redirect()->route('new_resident.requests.create');
     }
 
-    public function current($id)
+    public function current($id, $idOrig)
     {
         Resident::findOrFail($id)->delete();
 
-        return redirect()->route('current_resident.requests.create');
+        return redirect()->route('current_resident.requests.create', $idOrig);
     }
 }
