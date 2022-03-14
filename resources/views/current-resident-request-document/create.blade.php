@@ -36,7 +36,7 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('last_name') is-invalid @enderror grayed"
-                        name="last_name" placeholder="Lastname" value="{{ old('last_name') ?? $resident->last_name }}" required>
+                        name="last_name" placeholder="Lastname" value="{{ old('last_name') ?? $resident->last_name ?? '' }}" required>
 
                     @error('last_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -46,7 +46,7 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('first_name') is-invalid @enderror grayed"
-                        name="first_name" placeholder="Firstname" value="{{ old('first_name') ?? $resident->first_name }}" required>
+                        name="first_name" placeholder="Firstname" value="{{ old('first_name') ?? $resident->first_name ?? '' }}" required>
 
                     @error('first_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -58,7 +58,7 @@
 
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('middle_name') is-invalid @enderror grayed"
-                        name="middle_name" id="middle_name" placeholder="Middlename" value="{{ old('middle_name')?? $resident->middle_name }}" required>
+                        name="middle_name" id="middle_name" placeholder="Middlename" value="{{ old('middle_name')?? $resident->middle_name ?? '' }}" required>
 
                     @error('middle_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -67,13 +67,13 @@
 
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off" class="form-control border border-secondary grayed"
-                        name="suffix" placeholder="Suffix(Optional)" value="{{ old('suffix') ?? $resident->suffix }}">
+                        name="suffix" placeholder="Suffix(Optional)" value="{{ old('suffix') ?? $resident->suffix ?? '' }}">
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('house_number') is-invalid @enderror grayed"
-                        name="house_number" placeholder="House Number" value="{{ old('house_number') ?? $resident->house_number }}" required>
+                        name="house_number" placeholder="House Number" value="{{ old('house_number') ?? $resident->house_number ?? '' }}" required>
 
                     @error('house_number')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -83,7 +83,7 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('street') is-invalid @enderror grayed"
-                        name="street" placeholder="Street" value="{{ old('street') ?? $resident->street_name }}" required>
+                        name="street" placeholder="Street" value="{{ old('street') ?? $resident->street_name ?? '' }}" required>
 
                     @error('street')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -94,7 +94,7 @@
                     <input type="email" autocomplete="off" title="Example: sample@gmail.com"
                         pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
                         class="form-control border border-secondary @error('email_add') is-invalid @enderror grayed"
-                        name="email_add" placeholder="Email Address" value="{{ old('email_add') ?? $resident->email_add }}" required>
+                        name="email_add" placeholder="Email Address" value="{{ old('email_add') ?? $resident->email_add ?? ''}}" required>
                     @error('email_add')
                         <div class="invalid-tooltip">{{ $message }}</div>
                     @enderror
@@ -103,7 +103,7 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="text"
                         class="form-control border border-secondary @error('contact_number') is-invalid @enderror grayed"
-                        name="contact_number" placeholder="Contact Number" value="{{ old('contact_number') ?? $resident->contact_no }}" required>
+                        name="contact_number" placeholder="Contact Number" value="{{ old('contact_number') ?? $resident->contact_no ?? '' }}" required>
 
                     @error('contact_number')
                         <div class="invalid-tooltip">{{ $message }}</div>
