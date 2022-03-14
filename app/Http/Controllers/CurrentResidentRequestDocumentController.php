@@ -12,10 +12,12 @@ use App\Models\Resident;
 class CurrentResidentRequestDocumentController extends Controller
 {
     protected string $residentStatus = '';
+    protected string $prevUrl = '';
 
     public function __construct()
     {
         $this->residentStatus = (new ModelsRequest())->resident_statuses['current_resident'];
+        $this->prevUrl = '?' . substr(url()->previous(), strpos(url()->previous(), "?") + 1);
     }
 
     /**
@@ -42,15 +44,15 @@ class CurrentResidentRequestDocumentController extends Controller
         try {
             //scope query
             $resident = Resident::findRecord($request->last_name, $request->first_name, $request->middle_name, $request->suffix, $request->house_number)->first();
-            
+
             //no record in the database
             if (is_null($resident)) return redirect()->back()->with('showModal', '')
-                    ->withInput($request->all())
-                    ->with('Exception', [
-                        'title' => 'Notice!',
-                        'message' => 'Your records or personal information is not yet in the database please proceed to <a href="'.route("new_resident.requests.create").'" class="text-info"><u>new resident</u></a> to fillout the form',
-                    ]);
-        
+                ->withInput($request->all())
+                ->with('Exception', [
+                    'title' => 'Notice!',
+                    'message' => 'Your records or personal information is not yet in the database please proceed to <a href="' . route("new_resident.requests.create") . '" class="text-info"><u>new resident</u></a> to fillout the form',
+                ]);
+
             //check App -> Http -> Services.
             $requestDocuments = new RequestDocuments();
 
@@ -94,6 +96,72 @@ class CurrentResidentRequestDocumentController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $resident = Resident::findOrFail($id);
+
+        $latestRequest = $resident->requests()->latest()->first();
+
+        $document = null;
+
+        foreach($latestRequest->documents as $doc) {
+            if ($doc->business_permit) $document = $doc;
+        }
+
+        return view('current-resident-request-document.edit', compact('resident', 'latestRequest', 'document'));
+    }
+
+    public function update($id, storeCurrentResidentDocumentRequest $request)
+    {
+        try {
+            $modelsRequest = ModelsRequest::findOrFail($id);
+
+            if ($modelsRequest->confirmed_at) return redirect()->route('home');
+
+            $resident = $modelsRequest->resident;
+
+            $modelsRequest->delete();
+
+            $requestDocuments = new RequestDocuments();
+
+            array_push($requestDocuments->storeRequest['require_document'], $request->cor, $request->coi, $request->bc, $request->bp);
+            array_push($requestDocuments->storeRequest['require_purpose'], $request->sch, $request->pas, $request->gov, $request->lto, $request->has('oth') ? $request->purpose : null);
+
+            $validated = $requestDocuments->validateRequestedDocuments($requestDocuments->storeRequest);
+
+            if (is_string($validated))
+                return redirect()->back()->withInput($request->all())->with(
+                    strtok($validated, $requestDocuments->errorMessageSeparator),
+                    substr($validated, strpos($validated, $requestDocuments->errorMessageSeparator) + 1)
+                );
+
+            $modelsRequest = ModelsRequest::create(
+                array_merge(
+                    $request->only('last_name', 'first_name', 'middle_name', 'suffix', 'house_number', 'street', 'email_add', 'contact_number'),
+                    [
+                        'resident_id' => $resident->resident_id,
+                        'resident_status' => $this->residentStatus,
+                        'purpose' => implode(', ', $validated['require_purpose']),
+                    ]
+                )
+            );
+
+            $requestDocuments->createRequestedDocuments(
+                $modelsRequest,
+                $validated['require_document'],
+                array((new Document())->barangayDocuments['b'] => $request->only('business_name', 'business_nature', 'business_owner', 'business_add'))
+            );
+
+            return redirect()->route('current_resident.requests.show', $modelsRequest);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('showModal', '')
+                ->with('Exception', [
+                    'title' => 'Error',
+                    'message' => $e->getMessage(),
+                ]);
+        }
+    }
+
     /**
      * Display the specified resource.
      *
@@ -103,12 +171,13 @@ class CurrentResidentRequestDocumentController extends Controller
     public function show($id)
     {
         $modelsRequest = ModelsRequest::with('documents.business_permit')->findOrFail($id);
+        $url = $this->prevUrl;
 
         if ($modelsRequest->confirmed_at) return redirect()->route('home');
 
         if ($modelsRequest->resident_status != $this->residentStatus) abort(404);
 
-        return view('current-resident-request-document.show', compact('modelsRequest'));
+        return view('current-resident-request-document.show', compact('modelsRequest', 'url'));
     }
 
     /**

@@ -110,38 +110,89 @@ $(function () {
 
     disableLabel($('#label-business'), true);
 
-    $('.'+selectBarangayDocuments).click(function() {
-        var dropdown = $('.'+purposeSelecTitle);
+    $('.' + selectBarangayDocuments).click(function () {
+        var dropdown = $('.' + purposeSelecTitle);
 
         function unselectall() {
-            $('.request-purpose').each(function(i, obj) {
+            $('.request-purpose').each(function (i, obj) {
                 if (this.checked) $(this).trigger('click');
             });
         }
 
-        if ($('.'+selectBarangayDocuments+':checkbox:checked').length >= 2) {
+        if ($('.' + selectBarangayDocuments + ':checkbox:checked').length >= 2) {
             unselectall();
 
             $('#others').trigger('click');
 
             disableLabel(dropdown, true);
-        } else if ($('.'+selectBarangayDocuments+':checkbox:checked').length == 1 && $('#bp').is(':checked') && ! $('#business').is(':checked')) {
+        } else if ($('.' + selectBarangayDocuments + ':checkbox:checked').length == 1 && $('#bp').is(':checked') && !$('#business').is(':checked')) {
             unselectall();
 
             $('#business').trigger('click');
 
             disableLabel(dropdown, true);
-        } else if ($('.'+selectBarangayDocuments+':checkbox:checked').length == 1 && ! $('#bp').is(':checked')) {
+        } else if ($('.' + selectBarangayDocuments + ':checkbox:checked').length == 1 && !$('#bp').is(':checked')) {
             disableLabel(dropdown, false);
         } else {
             unselectall();
 
             if ($('#others').is(':checked')) $('#others').trigger('click');
-            
+
             disableLabel(dropdown, false);
 
             disableLabel($('#label-business'), true);
         }
+    });
+
+    //url
+    let docs = [], purposes = [];
+    const docsArrayName = 'docs', purposesArrayName = 'purposes';
+    const url = new URL(window.location.href);
+
+    docs = url.searchParams.get(docsArrayName) ? url.searchParams.get(docsArrayName).split(',') : [];
+    purposes = url.searchParams.get(purposesArrayName) ? url.searchParams.get(purposesArrayName).split(',') : [];
+
+    function triggerOption(arr) {
+        arr.forEach(function(item) {
+            if (! $('#' + item).is(':checked')) $('#' + item).trigger('click');
+        });
+    }
+
+    triggerOption(docs);
+    triggerOption(purposes);
+
+    function replaceStateOptionsParams(key, value) {
+        const url = new URL(window.location.href);
+        url.searchParams.delete(key);
+        url.searchParams.set(key, value);
+        window.history.replaceState(null, null, url);
+    }
+
+    function setUrlArrayParam(arr, arrName, className) {
+        $('.' + className).click(function () {
+            if (!arr.includes($(this).attr('id'))) {
+                arr.push($(this).attr('id'));
+            } else {
+                const index = arr.indexOf($(this).attr('id'));
+                
+                if (index > -1) {
+                    arr.splice(index, 1);
+                }
+            }
+    
+            replaceStateOptionsParams(arrName, arr);
+        });
+    }
+
+    setUrlArrayParam(docs, docsArrayName, selectBarangayDocuments);
+    setUrlArrayParam(purposes, purposesArrayName, selectRequestPurpose);
+
+    $('#purpose').ready(function() {
+        $('#purpose').attr('value', url.searchParams.get('other') ? url.searchParams.get('other') : '');
+    });
+
+    $('#purpose').on('input', function() {
+        replaceStateOptionsParams('other', this.value);
     });
 });
 

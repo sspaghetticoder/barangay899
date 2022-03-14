@@ -581,7 +581,7 @@
                     class="col-12 col-lg-9 position-relative specify-others-input @if (!old('oth')) d-none @endif">
                     <input type="search" autocomplete="off" form="requests.store"
                         class="form-control border border-secondary grayed @error('purpose') is-invalid @enderror"
-                        name="purpose" value="{{ old('purpose') }}" placeholder="Specify purpose">
+                        name="purpose" id="purpose" value="{{ old('purpose') }}" placeholder="Specify purpose">
 
                     @error('purpose')
                         <div class="invalid-tooltip">{{ $message }}</div>

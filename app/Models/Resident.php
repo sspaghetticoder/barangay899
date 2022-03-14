@@ -76,6 +76,6 @@ class Resident extends BaseModel
 
     public function requests()
     {
-        return $this->hasMany(Request::class, 'request_id');
+        return $this->hasMany(Request::class, 'resident_id');
     }
 }

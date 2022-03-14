@@ -26,7 +26,8 @@
                 <p class="text-left">Please fill out all the necessary fields.</p>
             </div>
 
-            <form action="{{ route('current_resident.requests.store') }}" method="POST" class="row g-4 px-0 px-lg-5">
+            <form action="{{ route('current_resident.requests.update', $latestRequest) }}" method="POST" class="row g-4 px-0 px-lg-5">
+                @method('PATCH')
                 @csrf
                 <div style="display: none;">
                     <input type="text" id="PreventChromeAutocomplete" name="PreventChromeAutocomplete"
@@ -36,7 +37,7 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('last_name') is-invalid @enderror grayed"
-                        name="last_name" placeholder="Lastname" value="{{ $resident->last_name ?? old('last_name') }}" required>
+                        name="last_name" placeholder="Lastname" value="{{ old('last_name') ? old('last_name') : $resident->last_name }}" required>
 
                     @error('last_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -46,7 +47,7 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('first_name') is-invalid @enderror grayed"
-                        name="first_name" placeholder="Firstname" value="{{ $resident->first_name ?? old('first_name') }}" required>
+                        name="first_name" placeholder="Firstname" value="{{ old('first_name') ? old('first_name') : $resident->first_name }}" required>
 
                     @error('first_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -58,7 +59,7 @@
 
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('middle_name') is-invalid @enderror grayed"
-                        name="middle_name" id="middle_name" placeholder="Middlename" value="{{ $resident->middle_name ?? old('middle_name') }}" required>
+                        name="middle_name" id="middle_name" placeholder="Middlename" value="{{ old('middle_name') ? old('middle_name') : $resident->middle_name }}" required>
 
                     @error('middle_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -67,13 +68,13 @@
 
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off" class="form-control border border-secondary grayed"
-                        name="suffix" placeholder="Suffix(Optional)" value="{{ $resident->suffix ?? old('suffix') }}">
+                        name="suffix" placeholder="Suffix(Optional)" value="{{ old('suffix') ? old('suffix') : $resident->suffix }}">
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('house_number') is-invalid @enderror grayed"
-                        name="house_number" placeholder="House Number" value="{{ $resident->house_number ?? old('house_number') }}" required>
+                        name="house_number" placeholder="House Number" value="{{ old('house_number') ? old('house_number') : $resident->house_number }}" required>
 
                     @error('house_number')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -83,7 +84,7 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('street') is-invalid @enderror grayed"
-                        name="street" placeholder="Street" value="{{ $resident->street_name ?? old('street') }}" required>
+                        name="street" placeholder="Street" value="{{ old('street') ? old('street') : $resident->street_name }}" required>
 
                     @error('street')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -94,7 +95,7 @@
                     <input type="email" autocomplete="off" title="Example: sample@gmail.com"
                         pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
                         class="form-control border border-secondary @error('email_add') is-invalid @enderror grayed"
-                        name="email_add" placeholder="Email Address" value="{{ $resident->email_add ?? old('email_add') }}" required>
+                        name="email_add" placeholder="Email Address" value="{{ old('email_add') ? old('email_add') : $resident->email_add }}" required>
                     @error('email_add')
                         <div class="invalid-tooltip">{{ $message }}</div>
                     @enderror
@@ -103,7 +104,7 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="text"
                         class="form-control border border-secondary @error('contact_number') is-invalid @enderror grayed"
-                        name="contact_number" placeholder="Contact Number" value="{{ $resident->contact_no ?? old('contact_number') }}" required>
+                        name="contact_number" placeholder="Contact Number" value="{{ old('contact_number') ? old('contact_number') : $resident->contact_no }}" required>
 
                     @error('contact_number')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -162,11 +163,11 @@
                     @endif
                 </div>
 
-                <div
-                    class="col-12 col-sm-6 col-lg-4 position-relative business-permit-input @if (!old('bp')) d-none @endif">
+
+                <div class="col-12 col-sm-6 col-lg-4 position-relative business-permit-input @if (!old('bp')) d-none @endif">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('business_name') is-invalid @enderror grayed"
-                        name="business_name" value="{{ old('business_name') }}" placeholder="Business Name">
+                        name="business_name" value="{{ old('business_name') ? old('business_name') : $document->business_permit->business_name ?? ''  }}" placeholder="Business Name">
 
                     @error('business_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -177,7 +178,7 @@
                     class="col-12 col-sm-6 col-lg-5 position-relative business-permit-input @if (!old('bp')) d-none @endif">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('business_owner') is-invalid @enderror grayed"
-                        name="business_owner" value="{{ old('business_owner') }}" placeholder="Business Owner">
+                        name="business_owner" value="{{ old('business_owner') ? old('business_owner') : $document->business_permit->business_owner ?? ''  }}" placeholder="Business Owner">
 
                     @error('business_owner')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -188,7 +189,7 @@
                     class="col-12 col-sm-6 col-lg-4 position-relative business-permit-input @if (!old('bp')) d-none @endif">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('business_add') is-invalid @enderror grayed"
-                        name="business_add" value="{{ old('business_add') }}" placeholder="Business Address">
+                        name="business_add" value="{{ old('business_add') ? old('business_add') : $document->business_permit->business_add ?? '' }}" placeholder="Business Address">
 
                     @error('business_add')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -199,7 +200,7 @@
                     class="col-12 col-sm-6 col-lg-5 position-relative business-permit-input @if (!old('bp')) d-none @endif">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('business_nature') is-invalid @enderror grayed"
-                        name="business_nature" value="{{ old('business_nature') }}" placeholder="Business Nature">
+                        name="business_nature" value="{{ old('business_nature') ? old('business_nature') : $document->business_permit->business_nature ?? '' }}" placeholder="Business Nature">
 
                     @error('business_nature')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -269,7 +270,7 @@
                         <div class="col-12 col-lg-6 pt-5">
                             <div class="row">
                                 <div class="col-12 col-md-3 col-lg-4">
-                                    <a href="{{ route('home') }}" class="w-100 btn btn-primary form-btn btn-cancel main-cta">Cancel</a>
+                                    <a href="{{ route('current_resident.requests.show', $latestRequest) }}" class="w-100 btn btn-primary form-btn btn-cancel main-cta">Cancel</a>
                                 </div>
                                 <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
                                     <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0 main-cta"
@@ -308,7 +309,6 @@
     @endif
 @endsection
 
-{{-- push this script to @stack --}}
 @push('scripts')
     <script src="{{ url('js/prevent-back.js') }}" defer></script>
 
