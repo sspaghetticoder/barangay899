@@ -102,6 +102,8 @@ class CurrentResidentRequestDocumentController extends Controller
 
         $latestRequest = $resident->requests()->latest()->first();
 
+        if ($latestRequest->confirmed_at) return redirect()->route('home');
+
         $document = null;
 
         foreach($latestRequest->documents as $doc) {
