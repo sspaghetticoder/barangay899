@@ -27,7 +27,7 @@ class CreateResidentsTable extends Migration
             $table->string('citizenship');
             $table->string('civil_status');
             $table->string('religion');
-            $table->string('blood_type');
+            $table->string('blood_type')->nullable();
             $table->string('pwd');
             $table->unsignedInteger('years_of_residence')->nullable();
             $table->string('member_4ps');

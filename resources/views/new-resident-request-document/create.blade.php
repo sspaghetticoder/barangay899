@@ -55,11 +55,13 @@
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
-                    <label for="middle_name" class="notice" style="font-size: 11px;"><span class="text-danger"><b>*</b></span>Put N/A if not applicable.</label>
-                    
+                    <label for="middle_name" class="notice" style="font-size: 11px;"><span
+                            class="text-danger"><b>*</b></span>Put N/A if not applicable.</label>
+
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('middle_name') is-invalid @enderror grayed"
-                        name="middle_name" id="middle_name" placeholder="Middlename" value="{{ old('middle_name') }}" required>
+                        name="middle_name" id="middle_name" placeholder="Middlename" value="{{ old('middle_name') }}"
+                        required>
 
                     @error('middle_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -166,7 +168,7 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('blood_type') is-invalid @enderror grayed"
-                        name="blood_type" placeholder="Blood Type" value="{{ old('blood_type') }}" required>
+                        name="blood_type" placeholder="Blood Type (Optional)" value="{{ old('blood_type') }}">
 
                     @error('blood_type')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -232,9 +234,11 @@
                         class="form-select border border-secondary default-select @error('identified_as') is-invalid @enderror grayed"
                         name="identified_as" value="{{ old('identified_as') }}" required style="border-radius: 10px">
                         <option value="" disabled selected>Identified as</option>
-                        <option value="Active Voter" {{ old('identified_as') == 'Active Voter' ? 'selected' : '' }}>Active Voter
+                        <option value="Active Voter" {{ old('identified_as') == 'Active Voter' ? 'selected' : '' }}>
+                            Active Voter
                         </option>
-                        <option value="Inactive Voter" {{ old('identified_as') == 'Inactive Voter' ? 'selected' : '' }}>Inactive Voter
+                        <option value="Inactive Voter" {{ old('identified_as') == 'Inactive Voter' ? 'selected' : '' }}>
+                            Inactive Voter
                         </option>
                     </select>
 
@@ -325,7 +329,7 @@
                         name="emp_stat" value="{{ old('emp_stat') }}" required style="border-radius: 10px">
                         <option value="" disabled selected>Employment Status</option>
                         <option value="Employed" {{ old('emp_stat') == 'Employed' ? 'selected' : '' }}>Employed</option>
-                        <option value="Unemploted" {{ old('emp_stat') == 'Unemploted' ? 'selected' : '' }}>Unemploted
+                        <option value="Unemployed" {{ old('emp_stat') == 'Unemployed' ? 'selected' : '' }}>Unemployed
                         </option>
                     </select>
 
@@ -357,7 +361,8 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="number"
                         class="form-control border border-secondary @error('monthly_income') is-invalid @enderror grayed"
-                        name="monthly_income" placeholder="Monthly Income (Optional)" value="{{ old('monthly_income') }}">
+                        name="monthly_income" placeholder="Monthly Income (Optional)"
+                        value="{{ old('monthly_income') }}">
 
                     @error('monthly_income')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -435,13 +440,11 @@
                     @enderror
                 </div>
 
-                <div class="col-12 d-block d-md-none">
-                    <label for="multiselect-wrapper" class="position-relative" style="font-size: 11px; word-wrap: break-word;"><span class="text-danger"><b>*</b></span>Please specify the purpose if you are requesting for more than 1(one) document on the “others” field.</label>
+                <div class="col-12">
+                    <p class="text-left">Note: Please specify the purpose for each document if you are requesting for more than 1 on the "Specify Purpose" field.</p>
                 </div>
 
-                <div class="col-12 col-lg-9 position-relative">
-                    <label for="multiselect-wrapper" class="notice d-none d-md-block" style="font-size: 11px; word-wrap: break-word;"><span class="text-danger"><b>*</b></span>Please specify the purpose if you are requesting for more than 1(one) document on the “others” field.</label>
-
+                <div class="col-12 col-lg-9 position-relative mt-0">
                     <div class="multiselect-wrapper">
                         <div class="position-relative select-list">
                             <div class="title title-barangay-documents">Select any barangay document you want to request
@@ -461,14 +464,13 @@
                                 </div>
                                 <div class="option">
                                     <input form="requests.store" type="checkbox" name="bc" id="bc" value="c"
-                                        data-document="Barangay Clearance"
-                                        class="barangay-document custom-dropdown-option"
+                                        data-document="Barangay Clearance" class="barangay-document custom-dropdown-option"
                                         @if (old('bc')) checked @endif />
                                     <label for="bc">Barangay Clearance</label>
                                 </div>
                                 <div class="option">
-                                    <input form="requests.store" type="checkbox" name="bp" id="bp" value="b"
-                                        type="checkbox" name="bp" id="bp" value="b" data-document="Business Permit"
+                                    <input form="requests.store" type="checkbox" name="bp" id="bp" value="b" type="checkbox"
+                                        name="bp" id="bp" value="b" data-document="Business Permit"
                                         class="barangay-document" @if (old('bp')) checked @endif />
                                     <label for="bp">Business Permit</label>
                                 </div>
@@ -554,9 +556,12 @@
                                 </div>
                                 <div class="option">
                                     <input form="requests.store" type="checkbox" name="lto" id="business"
-                                        value="License to Operate (For Business Permits Only)" data-purpose="License to Operate (For Business Permits Only)"
-                                        class="request-purpose" @if (old('lto')) checked @endif/>
-                                    <label for="business" id="label-business" style="cursor: disabled; pointer-events: none;">License to Operate (For Business Permits Only)</label>
+                                        value="License to Operate (For Business Permits Only)"
+                                        data-purpose="License to Operate (For Business Permits Only)"
+                                        class="request-purpose" @if (old('lto')) checked @endif />
+                                    <label for="business" id="label-business"
+                                        style="cursor: disabled; pointer-events: none;">License to Operate (For Business
+                                        Permits Only)</label>
                                 </div>
                                 <div class="option">
                                     <input form="requests.store" type="checkbox" name="oth" id="others"
@@ -590,45 +595,46 @@
 
                 <div class="col-12">
                     <div class="row position-relative"">
-                        <div class="   col-12 col-lg-6 pt-5">
-                            <div class=" row">
-                                <div class="col-12 col-md-3 col-lg-4">
-                                    <a href="{{ route('home') }}" class="w-100 btn btn-primary form-btn btn-cancel main-cta">Cancel</a>
-                                </div>
-                                <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
-                                    <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0 main-cta" value=" Next "
-                                        form="requests.store">
-                                </div>
+                            <div class="    col-12 col-lg-6 pt-5">
+                        <div class=" row">
+                            <div class="col-12 col-md-3 col-lg-4">
+                                <a href="{{ route('home') }}"
+                                    class="w-100 btn btn-primary form-btn btn-cancel main-cta">Cancel</a>
+                            </div>
+                            <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
+                                <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0 main-cta"
+                                    value=" Next " form="requests.store">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="request-img">
-                <img src="{{ url('images/request-create.png') }}" alt="photo" class="" style="">
-            </div>
+        </div>
 
-            <footer class="footer" id="footer" style="">
-                <div class="mb-5">
-                    <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
-                </div>
-            </footer>
+        <div class="request-img">
+            <img src="{{ url('images/request-create.png') }}" alt="photo" class="" style="">
+        </div>
+
+        <footer class="footer" id="footer" style="">
+            <div class="mb-5">
+                <p>Copyright © 2021 Barangay 899. All rights reserved.</p>
+            </div>
+        </footer>
         </div>
     </section>
 
-    @if (\Session::has('Exception'))
-        <x-modal>
+    @if (\Session::has('error'))
+        <x-modal id="{{ \Session::get('modal') ?? 'N/A' }}">
             <x-slot name="title">
-                {{ \Session::get('Exception')['title'] ?? 'N/A' }}
+                {{ \Session::get('error')['title'] ?? 'N/A' }}
             </x-slot>
 
             <x-slot name="message">
-                {!! \Session::get('Exception')['message'] ?? 'N/A' !!}
+                {!! \Session::get('error')['message'] ?? 'N/A' !!}
             </x-slot>
 
-            <button type="button" class="btn btn-primary px-4 form-btn btn-next border-0 main-cta"
-                data-bs-dismiss="modal">Close</button>
+            {!! \Session::get('error')['link'] ?? '<button type="button" class="btn btn-primary px-4 form-btn btn-next border-0 main-cta"
+            data-bs-dismiss="modal">Close</button>' !!}
         </x-modal>
     @endif
 @endsection
@@ -644,10 +650,12 @@
 
     <script src="{{ url('js/custom-dropdown.js') }}" defer></script>
 
-    @if (\Session::has('showModal'))
+    @if (\Session::has('modal'))
         <script defer>
+            var id = "{{ Session::get('modal') }}";
+
             $(document).ready(function() {
-                $('#confirmModal').modal('show');
+                $('#' + id).modal('show');
             });
         </script>
     @endif

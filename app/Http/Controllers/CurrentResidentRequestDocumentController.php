@@ -46,11 +46,12 @@ class CurrentResidentRequestDocumentController extends Controller
             $resident = Resident::findRecord($request->last_name, $request->first_name, $request->middle_name, $request->suffix, $request->house_number)->first();
 
             //no record in the database
-            if (is_null($resident)) return redirect()->back()->with('showModal', '')
+            if (is_null($resident)) return redirect()->back()->with('modal', 'showNoticeModal')
                 ->withInput($request->all())
-                ->with('Exception', [
+                ->with('error', [
                     'title' => 'Notice!',
-                    'message' => 'Your records or personal information is not yet in the database please proceed to <a href="' . route("new_resident.requests.create") . '" class="text-info"><u>new resident</u></a> to fillout the form',
+                    'message' => "You don't have any records yet in our barangay. Please proceed to the New Resident Request Form.",
+                    'link' => '<a href="'.route("new_resident.requests.create").'" class="btn btn-primary form-btn btn-next border-0 main-cta">Okay</a>'
                 ]);
 
             //check App -> Http -> Services.
@@ -88,8 +89,8 @@ class CurrentResidentRequestDocumentController extends Controller
 
             return redirect()->route('current_resident.requests.show', $modelsRequest);
         } catch (\Exception $e) {
-            return redirect()->back()->with('showModal', '')
-                ->with('Exception', [
+            return redirect()->back()->with('modal', 'confirmModal')
+                ->with('error', [
                     'title' => 'Error',
                     'message' => $e->getMessage(),
                 ]);
@@ -118,11 +119,12 @@ class CurrentResidentRequestDocumentController extends Controller
         try {
             $resident = Resident::findRecord($request->last_name, $request->first_name, $request->middle_name, $request->suffix, $request->house_number)->first();
 
-            if (is_null($resident)) return redirect()->back()->with('showModal', '')
+            if (is_null($resident)) return redirect()->back()->with('modal', 'showNoticeModal')
                 ->withInput($request->all())
-                ->with('Exception', [
+                ->with('error', [
                     'title' => 'Notice!',
-                    'message' => 'Your records or personal information is not yet in the database please proceed to <a href="' . route("current_resident.requests.new", $id) . '" class="text-info"><u>new resident</u></a> to fillout the form',
+                    'message' => "You don't have any records yet in our barangay. Please proceed to the New Resident Request Form.",
+                    'link' => '<a href="'.route("current_resident.requests.new", $id).'" class="btn btn-primary form-btn btn-next border-0 main-cta">Okay</a>'
                 ]);
 
             $modelsRequest = ModelsRequest::findOrFail($id);
@@ -165,8 +167,8 @@ class CurrentResidentRequestDocumentController extends Controller
 
             return redirect()->route('current_resident.requests.show', $modelsRequest);
         } catch (\Exception $e) {
-            return redirect()->back()->with('showModal', '')
-                ->with('Exception', [
+            return redirect()->back()->with('modal', 'confirmModal')
+                ->with('error', [
                     'title' => 'Error',
                     'message' => $e->getMessage(),
                 ]);
@@ -202,7 +204,7 @@ class CurrentResidentRequestDocumentController extends Controller
         $modelsRequest->confirmed_at = now();
         $modelsRequest->save();
 
-        return redirect()->route('home')->with('showModal', '');
+        return redirect()->route('home');
     }
 
     /**

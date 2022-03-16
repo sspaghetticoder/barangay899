@@ -371,8 +371,8 @@
                         <option value="Employed"
                             {{ old('emp_stat') ?? $resident->emp_stat == 'Employed' ? 'selected' : '' }}>Employed
                         </option>
-                        <option value="Unemploted"
-                            {{ old('emp_stat') ?? $resident->emp_stat == 'Unemploted' ? 'selected' : '' }}>Unemploted
+                        <option value="Unemployed"
+                            {{ old('emp_stat') ?? $resident->emp_stat == 'Unemployed' ? 'selected' : '' }}>Unemployed
                         </option>
                     </select>
 
@@ -481,7 +481,7 @@
                     <input type="search" autocomplete="off" form="requests.store"
                         class="form-control border border-secondary grayed @error('name_of_witness') is-invalid @enderror"
                         name="name_of_witness" placeholder="Name of witness of residency"
-                        value="{{ old('name_of_witness') ?? $latestRequest->name_of_witness ?? '' }}" required>
+                        value="{{ old('name_of_witness') ?? ($latestRequest->name_of_witness ?? '') }}" required>
 
                     @error('name_of_witness')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -548,7 +548,7 @@
                     <input type="search" autocomplete="off" form="requests.store"
                         class="form-control border border-secondary grayed @error('business_name') is-invalid @enderror"
                         name="business_name"
-                        value="{{ old('business_name') ?? $document->business_permit->business_name ?? '' }}"
+                        value="{{ old('business_name') ?? ($document->business_permit->business_name ?? '') }}"
                         placeholder="Business Name">
 
                     @error('business_name')
@@ -561,7 +561,7 @@
                     <input type="search" autocomplete="off" form="requests.store"
                         class="form-control border border-secondary grayed  @error('business_owner') is-invalid @enderror"
                         name="business_owner"
-                        value="{{ old('business_owner') ?? $document->business_permit->business_owner ?? '' }}"
+                        value="{{ old('business_owner') ?? ($document->business_permit->business_owner ?? '') }}"
                         placeholder="Business Owner">
 
                     @error('business_owner')
@@ -573,7 +573,8 @@
                     class="col-12 col-sm-6 col-lg-4 position-relative business-permit-input @if (!old('bp')) d-none @endif">
                     <input type="search" autocomplete="off" form="requests.store"
                         class="form-control border border-secondary grayed  @error('business_add') is-invalid @enderror"
-                        name="business_add" value="{{ old('business_add') ?? $document->business_permit->business_add ?? '' }}"
+                        name="business_add"
+                        value="{{ old('business_add') ?? ($document->business_permit->business_add ?? '') }}"
                         placeholder="Business Address">
 
                     @error('business_add')
@@ -586,7 +587,7 @@
                     <input type="search" autocomplete="off" form="requests.store"
                         class="form-control border border-secondary grayed  @error('business_nature') is-invalid @enderror"
                         name="business_nature"
-                        value="{{ old('business_nature') ?? $document->business_permit->business_nature ?? '' }}"
+                        value="{{ old('business_nature') ?? ($document->business_permit->business_nature ?? '') }}"
                         placeholder="Business Nature">
 
                     @error('business_nature')
@@ -658,14 +659,14 @@
 
                 <div class="col-12">
                     <div class="row position-relative"">
-                            <div class="    col-12 col-lg-6 pt-5">
+                                <div class="     col-12 col-lg-6 pt-5">
                         <div class=" row">
                             <div class="col-12 col-md-3 col-lg-4">
                                 {{-- <a href="{{ route('new_resident.requests.show', $latestRequest) }}"
                                     class="w-100 btn btn-primary form-btn btn-cancel main-cta">Cancel</a> --}}
 
                                 <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0 main-cta"
-                                value=" Back " form="requests.destroy">
+                                    value=" Back " form="requests.destroy">
                             </div>
                             <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
                                 <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0 main-cta"
@@ -689,18 +690,18 @@
         </div>
     </section>
 
-    @if (\Session::has('Exception'))
-        <x-modal>
+    @if (\Session::has('error'))
+        <x-modal id="{{ \Session::get('modal') ?? 'N/A' }}">
             <x-slot name="title">
-                {{ \Session::get('Exception')['title'] ?? 'N/A' }}
+                {{ \Session::get('error')['title'] ?? 'N/A' }}
             </x-slot>
 
             <x-slot name="message">
-                {!! \Session::get('Exception')['message'] ?? 'N/A' !!}
+                {!! \Session::get('error')['message'] ?? 'N/A' !!}
             </x-slot>
 
-            <button type="button" class="btn btn-primary px-4 form-btn btn-next border-0 main-cta"
-                data-bs-dismiss="modal">Close</button>
+            {!! \Session::get('error')['link'] ?? '<button type="button" class="btn btn-primary px-4 form-btn btn-next border-0 main-cta"
+            data-bs-dismiss="modal">Close</button>' !!}
         </x-modal>
     @endif
 @endsection
@@ -711,10 +712,12 @@
     <script defer src="{{ url('js/age-calculator.js') }}"></script>
     <script src="{{ url('js/custom-dropdown.js') }}" defer></script>
 
-    @if (\Session::has('showModal'))
+    @if (\Session::has('modal'))
         <script defer>
+            var id = "{{ Session::get('modal') }}";
+
             $(document).ready(function() {
-                $('#confirmModal').modal('show');
+                $('#' + id).modal('show');
             });
         </script>
     @endif

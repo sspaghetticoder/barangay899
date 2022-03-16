@@ -29,6 +29,47 @@
             <form id="requests.confirm" action="{{ route('requests.confirm', $modelsRequest) }}" method="POST"
                 class="row g-2 px-0 px-lg-5">
                 @csrf
+                @if (in_array("b", $modelsRequest->documents->pluck('document_type')->toArray()))
+                <div class="col-12 col-md-8 ps-lg-5">
+                    <label class=""><b>Fullname</b></label>
+                    <p class="ps-4">{{ $modelsRequest->fullName ?? 'N/A' }}</p>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <label><b>Address</b></label>
+                    <p class="ps-4">{{ $modelsRequest->address ?? 'N/A' }}</p>
+                </div>
+
+                <div class="col-12 col-md-8 ps-lg-5">
+                    <label><b>Email Address</b></label>
+                    <p class="ps-4">{{ $modelsRequest->email_add ?? 'N/A' }}</p>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <label><b>Contact Number</b></label>
+                    <p class="ps-4">{{ $modelsRequest->contact_number_formatted ?? 'N/A' }}</p>
+                </div>
+
+                <div class="col-12 col-md-8 ps-lg-5">
+                    <label><b>Barangay Documents</b></label>
+                    <p class="ps-4">
+                        @foreach ($modelsRequest->documents as $document)
+                            {{ $loop->first ? '' : ', ' }}
+                            <span>{{ $document->name ?? 'N/A' }}</span>
+                        @endforeach
+                    </p>
+                </div>
+
+                <div class="col-12 {{ in_array("b", $modelsRequest->documents->pluck('document_type')->toArray()) ? "col-md-4" : "col-md-5 col-xl-4" }}">
+                    <label><b>Purpose</b></label>
+                    <p class="ps-4">
+                        @foreach ($modelsRequest->purposes as $document)
+                            {{ $loop->first ? '' : ', ' }}
+                            <span>{{ $document ?? 'N/A' }}</span>
+                        @endforeach
+                    </p>
+                </div>
+                @else
                 <div class="col-12 col-md-6 ps-lg-5">
                     <label class=""><b>Fullname</b></label>
                     <p class="ps-4">{{ $modelsRequest->fullName ?? 'N/A' }}</p>
@@ -68,6 +109,7 @@
                         @endforeach
                     </p>
                 </div>
+                @endif
 
                 @foreach ($modelsRequest->documents as $document)
                     @if ($document->business_permit)

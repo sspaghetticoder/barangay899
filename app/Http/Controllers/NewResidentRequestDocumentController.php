@@ -41,18 +41,19 @@ class NewResidentRequestDocumentController extends Controller
         try {
             $resident = Resident::findRecord($request->last_name, $request->first_name, $request->middle_name, $request->suffix, $request->house_number)->first();
 
-            if (!is_null($resident)) return redirect()->back()->with('showModal', '')
+            if (!is_null($resident)) return redirect()->back()->with('modal', 'showNoticeModal')
                 ->withInput($request->all())
-                ->with('Exception', [
+                ->with('error', [
                     'title' => 'Notice!',
-                    'message' => 'You are currently registered as current resident in our database, please proceed on <a href="' . route("current_resident.requests.create", $resident->resident_id) . '" class="text-info"><u>current resident</u></a> form to request for documents.',
+                    'message' => 'You already have a record in our barangay. Please proceed to the Current Resident Request Form.',
+                    'link' => '<a href="'.route("current_resident.requests.create", $resident->resident_id).'" class="btn btn-primary form-btn btn-next border-0 main-cta">Okay</a>'
                 ]);
 
             //validate age
             if ($request->age <= 0) return redirect()->back()
                 ->withInput($request->all())
-                ->with('showModal', '')
-                ->with('Exception', [
+                ->with('modal', 'confirmModal')
+                ->with('error', [
                     'title' => 'Error',
                     'message' => "Invalid Birthdate!",
                 ]);
@@ -130,8 +131,8 @@ class NewResidentRequestDocumentController extends Controller
 
             return redirect()->route('new_resident.requests.show', $modelsRequest);
         } catch (\Exception $e) {
-            return redirect()->back()->with('showModal', '')
-                ->with('Exception', [
+            return redirect()->back()->with('modal', 'confirmModal')
+                ->with('error', [
                     'title' => 'Error',
                     'message' => $e->getMessage(),
                 ]);
@@ -166,22 +167,20 @@ class NewResidentRequestDocumentController extends Controller
 
             $resident = $modelsRequest->resident;
 
-            if (!is_null($residentOrig)
-                && ($residentOrig->last_name !== $modelsRequest->last_name && $residentOrig->first_name !== $modelsRequest->first_name 
-                    && $residentOrig->middle_name !== $modelsRequest->middle_name && $residentOrig->suffix !== $modelsRequest->suffix 
-                        && $residentOrig->house_number !== $modelsRequest->house_number)) return redirect()->back()->with('showModal', '')
+            if (! is_null($residentOrig) && $residentOrig->resident_id !== $resident->resident_id) return redirect()->back()->with('modal', 'showNoticeModal')
                 ->withInput($request->all())
-                ->with('Exception', [
+                ->with('error', [
                     'title' => 'Notice!',
-                    'message' => 'You are currently registered as current resident in our database, please proceed on <a href="' . route("new_resident.requests.current", ['id' => $resident->resident_id, 'idOrig' => $residentOrig->resident_id]) . '" class="text-info"><u>current resident</u></a> form to request for documents.',
+                    'message' => 'You already have a record in our barangay. Please proceed to the Current Resident Request Form.',
+                    'link' => '<a href="'.route("new_resident.requests.current", ['id' => $resident->resident_id, 'idOrig' => $residentOrig->resident_id]).'" class="btn btn-primary form-btn btn-next border-0 main-cta">Okay</a>'
                 ]);
 
             $oldRequest = $modelsRequest;
 
             if ($request->age <= 0) return redirect()->back()
                 ->withInput($request->all())
-                ->with('showModal', '')
-                ->with('Exception', [
+                ->with('modal', 'confirmModal')
+                ->with('error', [
                     'title' => 'Error',
                     'message' => "Invalid Birthdate!",
                 ]);
@@ -221,8 +220,8 @@ class NewResidentRequestDocumentController extends Controller
 
             return redirect()->route('new_resident.requests.show', $modelsRequest);
         } catch (\Exception $e) {
-            return redirect()->back()->with('showModal', '')
-                ->with('Exception', [
+            return redirect()->back()->with('modal', 'confirmModal')
+                ->with('error', [
                     'title' => 'Error',
                     'message' => $e->getMessage(),
                 ]);
@@ -259,8 +258,6 @@ class NewResidentRequestDocumentController extends Controller
         Resident::findOrFail($id)->delete();
 
         return redirect()->route('home');
-
-        // return redirect()->route('new_resident.requests.create');
     }
 
     public function current($id, $idOrig)

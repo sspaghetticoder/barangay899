@@ -32,7 +32,8 @@
                 @csrf
             </form>
 
-            <form action="{{ route('current_resident.requests.update', $latestRequest) }}" method="POST" class="row g-4 px-0 px-lg-5">
+            <form action="{{ route('current_resident.requests.update', $latestRequest) }}" method="POST"
+                class="row g-4 px-0 px-lg-5">
                 @method('PATCH')
                 @csrf
                 <div style="display: none;">
@@ -43,7 +44,8 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('last_name') is-invalid @enderror grayed"
-                        name="last_name" placeholder="Lastname" value="{{ old('last_name') ?? $resident->last_name }}" required>
+                        name="last_name" placeholder="Lastname" value="{{ old('last_name') ?? $resident->last_name }}"
+                        required>
 
                     @error('last_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -53,7 +55,8 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('first_name') is-invalid @enderror grayed"
-                        name="first_name" placeholder="Firstname" value="{{ old('first_name') ?? $resident->first_name }}" required>
+                        name="first_name" placeholder="Firstname" value="{{ old('first_name') ?? $resident->first_name }}"
+                        required>
 
                     @error('first_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -61,11 +64,13 @@
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
-                    <label for="middle_name" class="notice" style="font-size: 11px;"><span class="text-danger"><b>*</b></span>Put N/A if not applicable.</label>
+                    <label for="middle_name" class="notice" style="font-size: 11px;"><span
+                            class="text-danger"><b>*</b></span>Put N/A if not applicable.</label>
 
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('middle_name') is-invalid @enderror grayed"
-                        name="middle_name" id="middle_name" placeholder="Middlename" value="{{ old('middle_name') ?? $resident->middle_name }}" required>
+                        name="middle_name" id="middle_name" placeholder="Middlename"
+                        value="{{ old('middle_name') ?? $resident->middle_name }}" required>
 
                     @error('middle_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -80,7 +85,8 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('house_number') is-invalid @enderror grayed"
-                        name="house_number" placeholder="House Number" value="{{ old('house_number') ?? $resident->house_number }}" required>
+                        name="house_number" placeholder="House Number"
+                        value="{{ old('house_number') ?? $resident->house_number }}" required>
 
                     @error('house_number')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -90,7 +96,8 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('street') is-invalid @enderror grayed"
-                        name="street" placeholder="Street" value="{{ old('street') ?? $resident->street_name }}" required>
+                        name="street" placeholder="Street" value="{{ old('street') ?? $resident->street_name }}"
+                        required>
 
                     @error('street')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -101,7 +108,8 @@
                     <input type="email" autocomplete="off" title="Example: sample@gmail.com"
                         pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
                         class="form-control border border-secondary @error('email_add') is-invalid @enderror grayed"
-                        name="email_add" placeholder="Email Address" value="{{ old('email_add') ?? $resident->email_add }}" required>
+                        name="email_add" placeholder="Email Address"
+                        value="{{ old('email_add') ?? $resident->email_add }}" required>
                     @error('email_add')
                         <div class="invalid-tooltip">{{ $message }}</div>
                     @enderror
@@ -110,7 +118,8 @@
                 <div class="col-12 col-md-6 col-lg-3 position-relative">
                     <input type="text"
                         class="form-control border border-secondary @error('contact_number') is-invalid @enderror grayed"
-                        name="contact_number" placeholder="Contact Number" value="{{ old('contact_number') ?? $resident->contact_no }}" required>
+                        name="contact_number" placeholder="Contact Number"
+                        value="{{ old('contact_number') ?? $resident->contact_no }}" required>
 
                     @error('contact_number')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -118,11 +127,17 @@
                 </div>
 
                 <div class="col-12 d-block d-md-none">
-                    <label for="multiselect-wrapper" class="position-relative" style="font-size: 11px; word-wrap: break-word;"><span class="text-danger"><b>*</b></span>Please specify the purpose if you are requesting for more than 1(one) document on the “others” field.</label>
+                    <label for="multiselect-wrapper" class="position-relative"
+                        style="font-size: 11px; word-wrap: break-word;"><span class="text-danger"><b>*</b></span>Please
+                        specify the purpose if you are requesting for more than 1(one) document on the “others”
+                        field.</label>
                 </div>
 
                 <div class="col-12 col-lg-9 position-relative">
-                    <label for="multiselect-wrapper" class="notice d-none d-md-block" style="font-size: 11px; word-wrap: break-word;"><span class="text-danger"><b>*</b></span>Please specify the purpose if you are requesting for more than 1(one) document on the “others” field.</label>
+                    <label for="multiselect-wrapper" class="notice d-none d-md-block"
+                        style="font-size: 11px; word-wrap: break-word;"><span class="text-danger"><b>*</b></span>Please
+                        specify the purpose if you are requesting for more than 1(one) document on the “others”
+                        field.</label>
 
                     <div class="multiselect-wrapper">
                         <div class="position-relative select-list" style="height: min-content">
@@ -144,8 +159,7 @@
                                     <label for="coi">Certificate of Indigency</label>
                                 </div>
                                 <div class="option">
-                                    <input type="checkbox" name="bc" id="bc" value="c"
-                                        data-document="Barangay Clearance"
+                                    <input type="checkbox" name="bc" id="bc" value="c" data-document="Barangay Clearance"
                                         class="barangay-document custom-dropdown-option"
                                         @if (old('bc')) checked @endif />
                                     <label for="bc">Barangay Clearance</label>
@@ -170,10 +184,13 @@
                 </div>
 
 
-                <div class="col-12 col-sm-6 col-lg-4 position-relative business-permit-input @if (!old('bp')) d-none @endif">
+                <div
+                    class="col-12 col-sm-6 col-lg-4 position-relative business-permit-input @if (!old('bp')) d-none @endif">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('business_name') is-invalid @enderror grayed"
-                        name="business_name" value="{{ old('business_name') ? old('business_name') : $document->business_permit->business_name ?? ''  }}" placeholder="Business Name">
+                        name="business_name"
+                        value="{{ old('business_name') ? old('business_name') : $document->business_permit->business_name ?? '' }}"
+                        placeholder="Business Name">
 
                     @error('business_name')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -184,7 +201,9 @@
                     class="col-12 col-sm-6 col-lg-5 position-relative business-permit-input @if (!old('bp')) d-none @endif">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('business_owner') is-invalid @enderror grayed"
-                        name="business_owner" value="{{ old('business_owner') ? old('business_owner') : $document->business_permit->business_owner ?? ''  }}" placeholder="Business Owner">
+                        name="business_owner"
+                        value="{{ old('business_owner') ? old('business_owner') : $document->business_permit->business_owner ?? '' }}"
+                        placeholder="Business Owner">
 
                     @error('business_owner')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -195,7 +214,9 @@
                     class="col-12 col-sm-6 col-lg-4 position-relative business-permit-input @if (!old('bp')) d-none @endif">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('business_add') is-invalid @enderror grayed"
-                        name="business_add" value="{{ old('business_add') ? old('business_add') : $document->business_permit->business_add ?? '' }}" placeholder="Business Address">
+                        name="business_add"
+                        value="{{ old('business_add') ? old('business_add') : $document->business_permit->business_add ?? '' }}"
+                        placeholder="Business Address">
 
                     @error('business_add')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -206,7 +227,9 @@
                     class="col-12 col-sm-6 col-lg-5 position-relative business-permit-input @if (!old('bp')) d-none @endif">
                     <input type="search" autocomplete="off"
                         class="form-control border border-secondary @error('business_nature') is-invalid @enderror grayed"
-                        name="business_nature" value="{{ old('business_nature') ? old('business_nature') : $document->business_permit->business_nature ?? '' }}" placeholder="Business Nature">
+                        name="business_nature"
+                        value="{{ old('business_nature') ? old('business_nature') : $document->business_permit->business_nature ?? '' }}"
+                        placeholder="Business Nature">
 
                     @error('business_nature')
                         <div class="invalid-tooltip">{{ $message }}</div>
@@ -238,9 +261,12 @@
                                 </div>
                                 <div class="option">
                                     <input type="checkbox" name="lto" id="business"
-                                        value="License to Operate (For Business Permits Only)" data-purpose="License to Operate (For Business Permits Only)"
-                                        class="request-purpose" @if (old('lto')) checked @endif/>
-                                    <label for="business" id="label-business" style="cursor: disabled; pointer-events: none;">License to Operate (For Business Permits Only)</label>
+                                        value="License to Operate (For Business Permits Only)"
+                                        data-purpose="License to Operate (For Business Permits Only)"
+                                        class="request-purpose" @if (old('lto')) checked @endif />
+                                    <label for="business" id="label-business"
+                                        style="cursor: disabled; pointer-events: none;">License to Operate (For Business
+                                        Permits Only)</label>
                                 </div>
                                 <div class="option">
                                     <input type="checkbox" name="oth" id="others" data-purpose="Others (Please specify)"
@@ -279,7 +305,7 @@
                                     {{-- <a href="{{ route('current_resident.requests.show', $latestRequest) }}" class="w-100 btn btn-primary form-btn btn-cancel main-cta">Cancel</a> --}}
 
                                     <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0 main-cta"
-                                    value=" Back " form="requests.destroy">
+                                        value=" Back " form="requests.destroy">
                                 </div>
                                 <div class="col-12 col-md-3 mt-2 mt-md-0 col-lg-4 ">
                                     <input type="submit" class="w-100 btn btn-primary form-btn btn-next border-0 main-cta"
@@ -302,18 +328,18 @@
             </footer>
         </div>
     </section>
-    @if (\Session::has('Exception'))
-        <x-modal>
+    @if (\Session::has('error'))
+        <x-modal id="{{ \Session::get('modal') ?? 'N/A' }}">
             <x-slot name="title">
-                {{ \Session::get('Exception')['title'] ?? 'N/A' }}
+                {{ \Session::get('error')['title'] ?? 'N/A' }}
             </x-slot>
 
             <x-slot name="message">
-                {!! \Session::get('Exception')['message'] ?? 'N/A' !!}
+                {!! \Session::get('error')['message'] ?? 'N/A' !!}
             </x-slot>
 
-            <button type="button" class="btn btn-primary px-4 form-btn btn-next border-0 main-cta"
-                data-bs-dismiss="modal">Close</button>
+            {!! \Session::get('error')['link'] ?? '<button type="button" class="btn btn-primary px-4 form-btn btn-next border-0 main-cta"
+            data-bs-dismiss="modal">Close</button>' !!}
         </x-modal>
     @endif
 @endsection
@@ -323,10 +349,12 @@
 
     <script src="{{ url('js/custom-dropdown.js') }}" defer></script>
 
-    @if (\Session::has('showModal'))
+    @if (\Session::has('modal'))
         <script defer>
+            var id = "{{ Session::get('modal') }}";
+
             $(document).ready(function() {
-                $('#confirmModal').modal('show');
+                $('#' + id).modal('show');
             });
         </script>
     @endif

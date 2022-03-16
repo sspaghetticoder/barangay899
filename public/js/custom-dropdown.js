@@ -12,7 +12,11 @@
 
             //events
             $(selector).find('.title').on('click', function (e) {
-                $(".custom-dropdown-error").toggle();
+                // $(".custom-dropdown-error").toggle();
+                if($('.custom-dropdown-error').css('display') !== 'none') {
+                    $(".custom-dropdown-error").css("display", "none");
+                } 
+
                 $(".select-options").css("display", "none");
                 $(".select-options").toggleClass('current-select-options');
                 $(this).parent().find('.current-select-options').toggle();
