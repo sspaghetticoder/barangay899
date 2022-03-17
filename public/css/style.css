@@ -473,7 +473,7 @@ input[type=email]::placeholder {
 
     .request-img img {
         position: absolute;
-        top: -190px;
+        top: -200px;
         left: -180px;
         width: 400px;
     } 
