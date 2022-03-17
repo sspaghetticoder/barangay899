@@ -489,7 +489,7 @@ input[type=email]::placeholder {
         position: relative;
         padding-left: 3%;
         float: left;
-        /* bottom: -190px; */
+        bottom: -150px;
         text-align: left;
     }
 
